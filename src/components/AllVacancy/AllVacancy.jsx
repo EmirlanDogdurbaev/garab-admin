@@ -1,5 +1,4 @@
 import styles from "../AllVacancy/AllVacancy.module.scss";
-import SearchBar from "../SearchBar/SearchBar.jsx";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../store/slices/paginationSlice.js";

@@ -9,7 +9,7 @@ const UpdateBrand = () => {
     const dispatch = useDispatch();
     const { loading, error } = useSelector((state) => state.brands);
 
-    const [name, setName] = useState(""); // Убедимся, что `name` имеет значение по умолчанию
+    const [name, setName] = useState("");
     const [photo, setPhoto] = useState(null);
     const [preview, setPreview] = useState(null);
 
@@ -17,8 +17,8 @@ const UpdateBrand = () => {
         dispatch(fetchBrandsById(id))
             .unwrap()
             .then((brand) => {
-                setName(brand?.name || ""); // Убедимся, что `name` существует
-                setPreview(brand?.photo || null); // Убедимся, что `photo` существует
+                setName(brand?.name || "");
+                setPreview(brand?.photo || null); // Если фото пришло с сервера, используем его
             })
             .catch((err) => console.error("Ошибка загрузки бренда:", err));
     }, [id, dispatch]);
@@ -26,9 +26,14 @@ const UpdateBrand = () => {
     const handlePhotoChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setPhoto(file);
-            setPreview(URL.createObjectURL(file)); // Предпросмотр загруженного файла
+            setPhoto(file); // Устанавливаем новое фото
+            setPreview(URL.createObjectURL(file)); // Показываем предварительный просмотр
         }
+    };
+
+    const handleRemovePhoto = () => {
+        setPhoto(null);
+        setPreview(null);
     };
 
     const handleSubmit = (e) => {
@@ -76,11 +81,41 @@ const UpdateBrand = () => {
                 <label>Логотип</label>
                 <div className={styles.photo}>
                     {preview ? (
-                        <img src={preview} alt="Preview" className={styles.photoPreview} />
+                        <div className={styles.photoContainer}>
+                            <img src={preview} alt="Preview" className={styles.photoPreview} />
+                            <div className={styles.photoActions}>
+                                <button
+                                    type="button"
+                                    onClick={() => document.getElementById("photoInput").click()}
+                                    className={styles.updatePhotoButton}
+                                >
+                                    Изменить
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={handleRemovePhoto}
+                                    className={styles.removePhotoButton}
+                                >
+                                    Удалить
+                                </button>
+                            </div>
+                        </div>
                     ) : (
                         <div className={styles.photoPlaceholder}>
-                            <input type="file" accept="image/*" onChange={handlePhotoChange} />
-                            <span className={styles.photoIcon}>+</span>
+                            <input
+                                id="photoInput"
+                                type="file"
+                                accept="image/*"
+                                onChange={handlePhotoChange}
+                                style={{ display: "none" }}
+                            />
+                            <button
+                                type="button"
+                                onClick={() => document.getElementById("photoInput").click()}
+                                className={styles.addPhotoButton}
+                            >
+                                +
+                            </button>
                         </div>
                     )}
                 </div>

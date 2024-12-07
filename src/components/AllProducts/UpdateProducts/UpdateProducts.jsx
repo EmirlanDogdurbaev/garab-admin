@@ -9,7 +9,7 @@ import {fetchAllCollections} from "../../../store/slices/admin/collections/colle
 import {fetchCategories} from "../../../store/slices/getCategories.js";
 import {useParams} from "react-router-dom";
 
-export const API_URL = "http://localhost:8080";
+export const API_URL = "http://64.176.71.25/api";
 
 const UpdateProducts = () => {
     const {id} = useParams();

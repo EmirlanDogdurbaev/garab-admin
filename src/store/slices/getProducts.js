@@ -31,7 +31,7 @@ export const fetchProductInCollection = createAsyncThunk(
     async (productId, {getState}) => {
         const language = getState().language.currentLanguage;
         const response = await axios.get(
-            `${API_URI}//items/collection?collection_id=${productId}&lang=${language}`
+            `${API_URI}/items/collection?collection_id=${productId}&lang=${language}`
         );
         return response.data;
     }
