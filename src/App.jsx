@@ -14,7 +14,6 @@ import ChangeCollection from "./components/AllCollections/ChangeCollection/Chang
 import AddCategory from "./components/AllCategory/AddCategory/AddCategory.jsx";
 import AllVacancy from "./components/AllVacancy/AllVacancy.jsx";
 import AllCollections from "./components/AllCollections/AllCollections.jsx";
-import Register from "./components/Auth/Register/Register.jsx";
 import Login from "./components/Auth/Login/Login.jsx";
 import AddCollection from "./components/AllCollections/AddCollection/AddCollection.jsx";
 import CreateVacancy from "./components/AllVacancy/CreateVacancy/CreateVacancy.jsx";
