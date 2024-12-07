@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { fetchBrandsById, updateBrand } from "../../../store/slices/admin/brands/brands.js";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
+import {fetchBrandsById, updateBrand} from "../../../store/slices/admin/brands/brands.js";
 import styles from "./UpdateBrands.module.scss";
 
 const UpdateBrand = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const dispatch = useDispatch();
-    const { loading, error, brand } = useSelector((state) => state.brands);
+    const {loading, error, brand} = useSelector((state) => state.brands);
 
     const [name, setName] = useState(""); // Состояние для имени бренда
     const [photo, setPhoto] = useState(null); // Состояние для нового фото
@@ -53,7 +53,7 @@ const UpdateBrand = () => {
             formData.append("photo", photo); // Добавляем новое фото, если оно загружено
         }
 
-        dispatch(updateBrand({ brandId: id, formData }))
+        dispatch(updateBrand({brandId: id, formData}))
             .unwrap()
             .then(() => {
                 alert("Бренд успешно обновлен!");
@@ -84,8 +84,10 @@ const UpdateBrand = () => {
                 <label>Логотип</label>
                 <div className={styles.photo}>
                     {preview ? (
-                        <div className={styles.photoPreviewContainer}>
-                            <img src={preview} alt="Preview" className={styles.photoPreview} />
+                        <section className={styles.photo_cont}>
+                            <div className={styles.photoPreviewContainer}>
+                                <img src={preview} alt="Preview" className={styles.photoPreview}/>
+                            </div>
                             <button
                                 type="button"
                                 onClick={handleRemovePhoto}
@@ -93,7 +95,7 @@ const UpdateBrand = () => {
                             >
                                 Удалить
                             </button>
-                        </div>
+                        </section>
                     ) : (
                         <div className={styles.photoPlaceholder}>
                             <input
@@ -101,14 +103,19 @@ const UpdateBrand = () => {
                                 type="file"
                                 accept="image/*"
                                 onChange={handlePhotoChange}
-                                style={{ display: "none" }}
+                                style={{display: "none"}}
                             />
                             <button
                                 type="button"
                                 onClick={() => document.getElementById("photoInput").click()}
                                 className={styles.addPhotoButton}
                             >
-                                +
+                                <svg width="81" height="81" viewBox="0 0 81 81" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M40.5 67.5V40.5M40.5 40.5V13.5M40.5 40.5H67.5M40.5 40.5H13.5"
+                                          stroke="black" strokeWidth="1" strokeLinecap="none"/>
+                                </svg>
+
                             </button>
                         </div>
                     )}

@@ -9,7 +9,6 @@ import {fetchAllCollections} from "../../../store/slices/admin/collections/colle
 import {fetchCategories} from "../../../store/slices/getCategories.js";
 import {useParams} from "react-router-dom";
 
-export const API_URL = "http://64.176.71.25/api";
 
 const UpdateProducts = () => {
     const {id} = useParams();
@@ -43,7 +42,7 @@ const UpdateProducts = () => {
 
         const fetchProductData = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8080/api/getItemById?item_id=${id}`, {
+                const response = await axios.get(`${API_URI}/getItemById?item_id=${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
@@ -299,19 +298,16 @@ const UpdateProducts = () => {
                                 <div key={index} className={styles.cardWrapper}>
                                     <div className={styles.card} style={{ height: "300px", width: "300px" }}>
                                         {photo.file ? (
-                                            // Отображение локального файла
                                             <img
                                                 src={URL.createObjectURL(photo.file)}
                                                 alt={`Фото ${index + 1}`}
                                             />
                                         ) : photo.url ? (
-                                            // Отображение фото с сервера
                                             <img
-                                                src={`${API_URL}${photo.url}`}
+                                                src={`${photo.url}`}
                                                 alt={`Фото ${index + 1}`}
                                             />
                                         ) : (
-                                            // Поле загрузки файла
                                             <input
                                                 style={{ height: "300px", width: "300px" }}
                                                 type="file"
