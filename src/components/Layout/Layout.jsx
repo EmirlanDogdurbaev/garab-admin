@@ -13,8 +13,7 @@ const Layout = ({children}) => {
             <main style={{minHeight: "100vh", maxWidth: "1440px", margin:"0 auto",}}>
                 {children}
             </main>
-            <Footer/>
-            <EndLine/>
+
         </>
     )
 }
