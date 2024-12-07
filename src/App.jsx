@@ -1,11 +1,7 @@
 import './App.css';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import Homepage from './Pages/Homepage/Homepage';
 import ErrorPage from './Pages/Errorpage/Errorpage';
 import Layout from "./components/Layout/Layout.jsx";
-import Vacancy from "./Pages/Vacancy/Vacancy.jsx";
-import CatalogPage from "./Pages/CatalogPage/CatalogPage.jsx";
-import ProductDetailPage from "./Pages/ProductDetailPage/ProductDetailPage.jsx";
 import './i18n';
 import AdminPage from "./Pages/AdminPage/AdminPage.jsx";
 import AllProducts from "./components/AllProducts/AllProducts.jsx";
@@ -50,15 +46,8 @@ const App = () => {
     return (
         <Layout>
             <Routes>
-
-                <Route path="/" element={<Homepage/>}/>
-                <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
-                <Route path="/vacancy" element={<Vacancy/>}/>
-                <Route path="/catalog" element={<CatalogPage/>}/>
-                <Route path="/catalog/:type/:id" element={<ProductDetailPage/>}/>
                 <Route path="*" element={<ErrorPage/>}/>
-
                 {isAdmin && (
                     <>
                         <Route path="/admin/" element={
