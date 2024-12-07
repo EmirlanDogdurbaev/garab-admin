@@ -1,6 +1,4 @@
 import Nav from "../Nav/Nav.jsx";
-import Footer from "../Footer/Footer.jsx";
-import EndLine from "../Footer/EndLine/EndLine.jsx";
 
 // eslint-disable-next-line react/prop-types
 const Layout = ({children}) => {
