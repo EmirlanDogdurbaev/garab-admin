@@ -20,7 +20,9 @@ export const fetchBrandsById = createAsyncThunk(
     'brands/fetchBrandsById',
     async (id, {rejectWithValue}) => {
         try {
-            const response = await axios.get(`${API_URI}/brands?brand_id=${id}`);
+            console.log(id)
+            const response = await axios.get(`${API_URI}/brand?brand_id=${id}`);
+            console.log(response.data)
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response?.data || 'Failed to fetch data');
@@ -104,6 +106,7 @@ export const brands = createSlice({
     name: "brands",
     initialState: {
         brands: [],
+        brand: []
     },
     extraReducers: (builder) => {
         builder
@@ -113,7 +116,7 @@ export const brands = createSlice({
             })
             .addCase(fetchBrandsById.fulfilled, (state, action) => {
                 state.loading = false;
-                state.brands = action.payload;
+                state.brand = action.payload;
             })
             .addCase(fetchBrandsById.rejected, (state, action) => {
                 state.loading = false;
