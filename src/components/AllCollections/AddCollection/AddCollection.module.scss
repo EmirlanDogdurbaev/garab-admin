@@ -1,0 +1,21 @@
+.AddCollection {
+  width: 100%;
+  background: #fff;
+  padding: 50px 0;
+
+  .inner {
+    max-width: 1350px;
+    margin: 0 auto;
+  }
+
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h2 {
+    font-size: 20px;
+  }
+}

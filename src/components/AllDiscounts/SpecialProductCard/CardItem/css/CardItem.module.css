@@ -1,0 +1,107 @@
+.CardItem {
+  max-width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  background-color: white;
+  margin: 0 auto;
+}
+.CardItem .card_content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding: 10px;
+}
+.CardItem .card_content article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+.CardItem .card_content article h4 {
+  font-size: 18px;
+  color: #212529;
+  font-weight: 600;
+  word-break: break-word;
+}
+.CardItem .card_content .top_content {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.CardItem .card_content .top_content .iskender {
+  background-color: #ff6f61;
+  font-size: 16px;
+  padding: 5px 10px;
+  color: white;
+  text-transform: capitalize;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 5px;
+}
+
+@media (max-width: 1280px) {
+  .CardItem {
+    max-width: 700px;
+  }
+}
+@media (max-width: 600px) {
+  .CardItem {
+    max-width: 400px;
+    padding: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .CardItem img {
+    width: 100%;
+  }
+  .CardItem .card_content {
+    min-height: 200px;
+    gap: 30px;
+    padding-bottom: 20px;
+  }
+  .CardItem .card_content article {
+    gap: 20px;
+  }
+}
+@media (max-width: 550px) {
+  .CardItem {
+    max-width: 400px;
+    margin: 0;
+  }
+  .CardItem .card_content {
+    max-width: 400px;
+  }
+}
+@media (max-width: 400px) {
+  .CardItem {
+    max-width: 320px;
+    margin: 0;
+  }
+  .CardItem .card_content {
+    max-width: 320px;
+  }
+}

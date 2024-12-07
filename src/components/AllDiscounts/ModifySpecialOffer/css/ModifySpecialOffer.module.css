@@ -1,0 +1,119 @@
+.promotionForm {
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+.promotionForm h2 {
+  margin-bottom: 15px;
+  font-size: 30px;
+}
+.promotionForm .select_section {
+  max-width: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+.promotionForm .checkbox_container {
+  border: 1px solid #E7572A;
+  padding: 20px;
+}
+.promotionForm .line {
+  background: #E0E0E2;
+  height: 4px;
+  width: 100%;
+}
+.promotionForm .dateInputContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+.promotionForm .dateInputContainer .inner_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  gap: 30px;
+}
+.promotionForm .dateInputContainer .inner_container > label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  font-size: 18px;
+}
+.promotionForm .dateInputContainer .inner_container > label input {
+  width: 350px;
+  padding: 10px 20px;
+}
+
+.tableContainer {
+  padding: 20px 10px;
+  border-radius: 8px;
+  height: auto;
+  border: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.customTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableCell {
+  padding: 20px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.checkboxContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+}
+
+.label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  font-size: 18px;
+}
+
+.saveButton {
+  border: none;
+  padding: 15px 20px;
+  background-color: #4759FF;
+  color: white;
+}

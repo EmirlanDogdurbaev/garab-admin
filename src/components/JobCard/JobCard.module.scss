@@ -1,0 +1,118 @@
+.jobCard {
+  overflow: hidden;
+  width: 100%;
+  max-width: 1400px;
+  border-top: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  padding:0 10px ;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  width: 900px;
+  font-style: italic;
+  //background-color: red;
+}
+
+.divided {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.salary {
+  background-color: #ff6f61;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  width: 200px;
+  text-align: center;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.details {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.7s ease, opacity 0.7s ease;
+  background-color: #ffffff;
+  padding: 0 16px;
+  gap: 20px;
+}
+
+.detailsOpen {
+  max-height: 800px;
+  opacity: 1;
+  padding: 25px 16px;
+}
+
+.section {
+  margin-left: auto;
+  width: 60%;
+  margin-bottom: 16px;
+
+  @media (max-width: 1280px) {
+    width: 58%;
+  }
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+
+}
+
+.section h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.list {
+  list-style: disc !important;
+  padding-left: 20px;
+  margin: 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+.section p {
+  margin: 0;
+  font-size: 18px;
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+.applyButton {
+  width: 200px;
+  padding: 12px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 16px;
+}

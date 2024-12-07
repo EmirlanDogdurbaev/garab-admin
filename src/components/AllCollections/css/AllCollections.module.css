@@ -1,0 +1,144 @@
+.AllCollections {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 0;
+  background-color: #FFFFFF;
+}
+.AllCollections .search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+.AllCollections .search .filter {
+  max-width: 170px;
+  border-radius: 100px;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  background: #212529;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 10px;
+  border: none;
+  text-transform: capitalize;
+  font-size: 16px;
+}
+.AllCollections .search .add_btn {
+  padding: 10px 20px;
+  min-width: 200px;
+  border: 1px solid #4759FF;
+  border-radius: 5px;
+  background-color: #4759FF;
+  color: white;
+  font-size: 18px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+.AllCollections .tableContainer {
+  min-height: 670px;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 20px 0;
+}
+.AllCollections .title {
+  max-width: 650px !important;
+  word-break: break-word;
+  line-height: 1.6;
+}
+.AllCollections .customTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.AllCollections .customTable th, .AllCollections .customTable td {
+  padding: 20px 15px;
+  border-bottom: 1px solid #ddd;
+}
+.AllCollections .customTable th {
+  background-color: #f4f6fa;
+  font-weight: bold;
+}
+.AllCollections .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+.AllCollections .actionButton {
+  background-color: #f0f4ff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+  padding: 20px;
+}
+.AllCollections .actionButton:hover {
+  background-color: #e0e8ff;
+}
+.AllCollections .actionButton svg {
+  color: #6b7cff;
+}
+.AllCollections .pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+.AllCollections .pagination button {
+  border: none;
+  background: none;
+  font-size: 22px;
+  color: #444;
+  cursor: pointer;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+.AllCollections .pagination button.active {
+  color: #f4a261;
+  font-weight: bold;
+}
+.AllCollections .pagination button:hover:not(.active) {
+  color: #888;
+}
+.AllCollections .pagination button:disabled {
+  color: #ccc;
+  cursor: default;
+}

@@ -1,0 +1,268 @@
+.Reviews {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.Reviews .title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 30px 0;
+  gap: 20px;
+}
+.Reviews .title h3 {
+  font-size: 24px;
+}
+.Reviews .title a {
+  color: #E7572A;
+  font-size: 16px;
+}
+.Reviews .container {
+  border-radius: 10px;
+  margin: 0 auto;
+  position: relative;
+  max-width: 850px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #FFFFFF;
+}
+.Reviews .container .reviews_slider_cont {
+  width: 85%;
+  margin: 0 auto;
+}
+.Reviews .container .reviews_slider_cont .slide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.Reviews .container .reviews_slider_cont .slide .quoteIcon {
+  margin-bottom: 20px;
+}
+.Reviews .container .reviews_slider_cont .slide p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.Reviews .container .reviews_slider_cont .slide .stars {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 20px;
+}
+.Reviews .container .reviews_slider_cont .slide .stars li {
+  margin: 0 2px;
+  color: #ffbc37;
+  font-size: 20px;
+}
+.Reviews .container .reviews_slider_cont .slide h6 {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 16px;
+}
+.Reviews .prev,
+.Reviews .next {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background-color: #fff;
+  color: #fff;
+  border: 1px solid #d0cdcd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+.Reviews .prev:hover,
+.Reviews .next:hover {
+  background-color: #d0cdcd;
+}
+.Reviews .prev {
+  left: 15px;
+}
+.Reviews .next {
+  right: 15px;
+}
+
+@media (max-width: 1440px) {
+  .Reviews {
+    max-width: 90%;
+    padding: 15px;
+  }
+  .Reviews .container .reviews_slider_cont .slide {
+    padding: 18px;
+  }
+  .Reviews .container .reviews_slider_cont .slide p {
+    font-size: 15px;
+  }
+  .Reviews .container .reviews_slider_cont .slide .stars li {
+    font-size: 18px;
+  }
+  .Reviews .container .reviews_slider_cont .slide h6 {
+    font-size: 16px;
+  }
+}
+@media (max-width: 1024px) {
+  .Reviews {
+    padding: 10px;
+  }
+  .Reviews .container .reviews_slider_cont .slide {
+    padding: 15px;
+  }
+  .Reviews .container .reviews_slider_cont .slide p {
+    font-size: 14px;
+  }
+  .Reviews .container .reviews_slider_cont .slide .stars li {
+    font-size: 16px;
+  }
+  .Reviews .container .reviews_slider_cont .slide h6 {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .Reviews {
+    padding: 10px;
+  }
+  .Reviews .container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .Reviews .container .reviews_slider_cont .slide {
+    padding: 12px;
+  }
+  .Reviews .container .reviews_slider_cont .slide p {
+    font-size: 13px;
+  }
+  .Reviews .container .reviews_slider_cont .slide .stars li {
+    font-size: 14px;
+  }
+  .Reviews .container .reviews_slider_cont .slide h6 {
+    font-size: 14px;
+  }
+  .prev,
+  .next {
+    width: 35px;
+    height: 35px;
+  }
+}
+@media (max-width: 600px) {
+  .Reviews {
+    padding: 8px;
+  }
+  .Reviews .container .reviews_slider_cont {
+    width: 100%;
+  }
+  .Reviews .container .reviews_slider_cont .slide {
+    padding: 10px;
+  }
+  .Reviews .container .reviews_slider_cont .slide p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .Reviews .container .reviews_slider_cont .slide .stars li {
+    font-size: 12px;
+  }
+  .Reviews .container .reviews_slider_cont .slide h6 {
+    font-size: 12px;
+  }
+  .Reviews .prev,
+  .Reviews .next {
+    width: 30px;
+    height: 30px;
+  }
+  .Reviews .prev {
+    top: 25px;
+  }
+  .Reviews .next {
+    top: 25px;
+  }
+}
+@media (max-width: 600px) and (max-width: 320px) {
+  .Reviews {
+    padding: 5px;
+  }
+  .Reviews .container .reviews_slider_cont .slide {
+    padding: 8px;
+  }
+  .Reviews .container .reviews_slider_cont .slide p {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+  .Reviews .container .reviews_slider_cont .slide .stars li {
+    font-size: 10px;
+  }
+  .Reviews .container .reviews_slider_cont .slide h6 {
+    font-size: 11px;
+  }
+  .Reviews .prev,
+  .Reviews .next {
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+  }
+}
+@media (max-width: 320px) {
+  .Reviews {
+    padding: 5px;
+  }
+  .Reviews .container .reviews_slider_cont .slide {
+    padding: 8px;
+  }
+  .Reviews .container .reviews_slider_cont .slide p {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+  .Reviews .container .reviews_slider_cont .slide .stars li {
+    font-size: 10px;
+  }
+  .Reviews .container .reviews_slider_cont .slide h6 {
+    font-size: 11px;
+  }
+  .Reviews .prev,
+  .Reviews .next {
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+  }
+}

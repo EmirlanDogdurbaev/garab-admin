@@ -1,0 +1,24 @@
+.btn_cont{
+  margin: 20px auto;
+  max-width: 1400px;
+  display: flex;
+  gap: 20px;
+
+  @media (max-width: 1280px) {
+    padding: 0 30px;
+
+  }
+  .arrow_left, .arrow_right {
+    padding: 10px 30px;
+    background-color: #ffffff;
+    z-index: 2;
+    border: none;
+    color: #212529;
+    transition: background-color 0.3s ease, opacity 0.3s ease; 
+  }
+  
+  .arrow_left:hover, .arrow_right:hover {
+    background-color: #e0e0e0; 
+    opacity: 0.9; 
+  }  
+}

@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "production": "Production Garant",
+    "item1": "Standard Collections",
+    "item2": "Painted Collections",
+    "distribution": "Distribution",
+    "distribution_item1": "Plumbing",
+    "distribution_item2": "Plumbing",
+    "distribution_item3": "Plumbing",
+
+    "vacancies": "Vacancies",
+    "english": "English",
+    "russian": "Russian"
+  },
+  "counter": {
+    "market": "as",
+    "clients": "as"
+  }
+  ,
+  "header": {
+    "title": "Garant ",
+    "subtitle": "premium",
+    "b2b": "B2B Wholesale",
+    "description": "With over 10 years of experience in designing and manufacturing high-quality bathroom furniture, we proudly present our bathroom collections.",
+    "toCatalog": "To Catalog"
+  },
+  "about": {
+    "years": "years",
+    "years2": "in the market",
+    "customer": "satisfied customers",
+    "prod": "products per year",
+    "garant": "Garant premium",
+    "title": " is a leading international manufacturer of designer bathroom furniture",
+    "description": "Our constant aim is to fulfil the needs of our customers. We have achieved this through our values working in perfect symbiosis, respond to the market by providing a wide range of bathroom furniture that is highly competitive in terms of design,quality and price."
+  },
+  "special_offer": {
+    "title": "Special offer"
+  },
+  "new": {
+    "title1": "Popular",
+    "title2": "New products"
+  },
+  "catalog": {
+    "title": "Catalogue",
+    "link": "See more",
+    "subtitle1": "Own production ‘Garant’",
+    "description1": "We create unique furniture to offer our customers unique furniture, entirely made by us in Kyrgyzstan, with passion and attention...",
+    "subtitle2": "Furniture from trusted partners",
+    "description2": "We offer not only our own furniture, but also carefully selected furniture from trusted partners. Each item is quality controlled to meet our standards and harmoniously complement the Garant premium collections",
+    "link2": "Go"
+  },
+  "reviews": {
+    "title": "Reviews",
+    "button": "Leave a review"
+  },
+  "partners": {
+    "title": "Our partners"
+  },
+  "vacancies": {
+    "title": "Vacancies"
+  },
+  "catalog_page":{
+    "search":"Search",
+    "filter":"Filters",
+    "showing":"Showing",
+    "of":"of"
+  },
+  "detail_page":{
+    "block1":"Products from this collection",
+    "block2":"Similar products"
+  },
+  "footer":{
+    "addresses":"Addresses",
+    "city1": "ElitStroy",
+    "address1":"st. Den Syaopina 18/1",
+    "city2": "Batken",
+    "address2":"st. Lev-Tolstoy 19",
+    "contacts":"Contacts",
+    "phone_num":"Phone numbers",
+    "vacancies":"Vacancies",
+    "see_more":"See more..."
+  }
+}

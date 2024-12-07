@@ -1,0 +1,302 @@
+@charset "UTF-8";
+/* Общие стили для модального окна */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 999;
+  -webkit-animation: overlayFadeIn 0.5s ease-out forwards;
+          animation: overlayFadeIn 0.5s ease-out forwards;
+  -webkit-transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out;
+}
+
+.wrap {
+  background-color: white;
+  padding: 10px;
+  border-radius: 40px;
+  position: relative;
+  width: 420px;
+  height: 470px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-animation: slideInFromRight 0.5s ease-out forwards;
+          animation: slideInFromRight 0.5s ease-out forwards;
+}
+
+.box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 340px;
+  gap: 40px;
+}
+
+.vals {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 10px;
+}
+
+.vals p {
+  padding-left: 15px;
+}
+
+.vals input {
+  width: 170px;
+  height: 40px;
+  background-color: #F5F5F5;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  gap: 10px;
+  width: 100%;
+}
+.buttons .btn1 {
+  width: 170px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+.buttons .btn2 {
+  width: 170px;
+  height: 40px;
+  background: #212529;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  font-weight: 500;
+}
+
+.exitIcon {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  cursor: pointer;
+}
+
+.range {
+  width: 100%;
+}
+.range p {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 22px;
+}
+
+/* Анимации */
+@-webkit-keyframes slideInFromRight {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+@keyframes slideInFromRight {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+@-webkit-keyframes slideOutToLeft {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-200%);
+            transform: translateX(-200%);
+  }
+}
+@keyframes slideOutToLeft {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-200%);
+            transform: translateX(-200%);
+  }
+}
+@-webkit-keyframes overlayFadeIn {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes overlayFadeIn {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+@-webkit-keyframes overlayFadeOut {
+  0% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+@keyframes overlayFadeOut {
+  0% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+/* Стили для закрытия (fade out) */
+.overlay.fadeOut {
+  -webkit-animation: overlayFadeOut 0.3s ease-in forwards;
+          animation: overlayFadeOut 0.3s ease-in forwards;
+}
+
+.wrap.fadeOutWrap {
+  -webkit-animation: slideOutToLeft 0.5s ease-in forwards;
+          animation: slideOutToLeft 0.5s ease-in forwards;
+}
+
+/* Стили для радиокнопок */
+.radios {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+  font-size: 22px;
+}
+
+.radios span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.radios input[type=radio] {
+  appearance: none; /* Убираем стандартный стиль */
+  -webkit-appearance: none; /* Для Safari */
+  -moz-appearance: none; /* Для Firefox */
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #f13657; /* Красная рамка */
+  background-color: white; /* Белый фон */
+  cursor: pointer;
+  position: relative;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; /* Плавные анимации */
+}
+
+.radios input[type=radio]:checked {
+  background-color: #f13657; /* Красный цвет при нажатии */
+  border-color: #f13657;
+}
+
+.radios p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-left: 10px; /* Отступ от радиокнопки */
+  cursor: pointer;
+}
+
+/* Эффект на фокус */
+.radios input[type=radio]:focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 0 3px rgba(241, 54, 87, 0.3);
+          box-shadow: 0 0 0 3px rgba(241, 54, 87, 0.3); /* Красное свечение при фокусе */
+}
+
+@media screen and (max-width: 620px) {
+  .wrap {
+    width: 360px;
+  }
+  .box {
+    width: 320px;
+  }
+  .vals input {
+    width: 160px;
+  }
+}
+@media screen and (max-width: 330px) {
+  .wrap {
+    width: 300px;
+  }
+  .box {
+    width: 270px;
+  }
+  .vals input {
+    width: 135px;
+  }
+}

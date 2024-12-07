@@ -1,0 +1,122 @@
+.CardItem {
+  max-width: 100%;
+  display: flex;
+  gap: 10px;
+  background-color: white;
+  margin: 0 auto;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.250);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4); 
+    transform: translateY(-5px);
+  }
+
+  .card_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    padding: 10px;
+
+    .price{
+      display: flex;
+      gap: 30px;
+
+      h4{
+        font-size: 18px;
+      }
+      .old{
+        text-decoration: line-through;
+        color: #ada7a7;
+      }
+    }
+
+    article {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      h4 {
+        font-size: 18px;
+        color: #212529;
+        font-weight: 600;
+        word-break: break-word;
+      }
+    }
+
+    .top_content {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .link{
+        margin-left: auto;
+      }
+
+      .iskender {
+        background-color: #ff6f61;
+        font-size: 16px;
+        padding: 5px 10px;
+        color: white;
+        text-transform: capitalize;
+        font-family: "Montserrat", sans-serif;
+        border-radius: 5px;
+      }
+    }
+
+
+  }
+}
+
+
+// Общие стили для адаптивности
+@media (max-width: 1280px) {
+  .CardItem {
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 600px) {
+  .CardItem {
+    max-width: 400px;
+    padding: 0;
+    flex-direction: column;
+
+    img {
+      width: 100%;
+    }
+
+    .card_content {
+      min-height: 200px;
+      gap: 30px;
+      padding-bottom: 20px;
+
+      article {
+        gap: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .CardItem {
+    max-width: 400px;
+    margin: 0;
+    .card_content {
+      max-width: 400px;
+    }
+  }
+}
+@media (max-width: 400px) {
+  .CardItem {
+    max-width: 320px;
+    margin: 0;
+    .card_content {
+      max-width: 320px;
+    }
+  }
+}
+
+

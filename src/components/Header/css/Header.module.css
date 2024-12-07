@@ -1,0 +1,177 @@
+.sliderContainer {
+  max-width: 2560px;
+  margin: 0 auto;
+  max-height: 700px;
+  overflow: hidden;
+  position: relative;
+}
+.sliderContainer .react-slideshow-container {
+  height: 100%;
+}
+.sliderContainer .bgSlide {
+  max-width: 2560px;
+  margin: 0 auto;
+  height: 700px;
+  background-size: cover;
+  background-position: center;
+}
+.sliderContainer .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  z-index: 1;
+  background-color: rgba(156, 162, 169, 0.6);
+  max-width: 2560px;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.sliderContainer .content .container {
+  max-width: 1000px;
+  z-index: 1000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 15px;
+}
+@media (max-width: 850px) {
+  .sliderContainer .content .container {
+    max-width: 700px;
+  }
+}
+@media (max-width: 768px) {
+  .sliderContainer .content .container {
+    max-width: 680px;
+  }
+}
+@media (max-width: 650px) {
+  .sliderContainer .content .container {
+    max-width: 600px;
+  }
+}
+@media (max-width: 600px) {
+  .sliderContainer .content .container {
+    max-width: 550px;
+  }
+}
+@media (max-width: 550px) {
+  .sliderContainer .content .container {
+    max-width: 440px;
+  }
+}
+@media (max-width: 460px) {
+  .sliderContainer .content .container {
+    max-width: 400px;
+  }
+}
+@media (max-width: 400px) {
+  .sliderContainer .content .container {
+    max-width: 350px;
+  }
+}
+.sliderContainer .content .container .b2b {
+  border: 1px solid white;
+  padding: 10px 10px;
+  border-radius: 40px;
+}
+.sliderContainer .content .container .b2b p {
+  font-weight: bold;
+  font-size: 24px;
+}
+.sliderContainer .content .container > span {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  gap: 20px;
+  height: 100px;
+  font-weight: 800;
+}
+@media (max-width: 550px) {
+  .sliderContainer .content .container > span {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    gap: 5px;
+  }
+}
+.sliderContainer .content .container > span h4 {
+  font-size: 50px;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 15px;
+  font-family: Arial;
+}
+@media (max-width: 650px) {
+  .sliderContainer .content .container > span h4 {
+    font-size: 36px;
+  }
+}
+@media (max-width: 550px) {
+  .sliderContainer .content .container > span h4 {
+    font-size: 30px;
+  }
+}
+.sliderContainer .content .container > span h1 {
+  color: #212529;
+  font-size: 120px;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-family: Arial;
+}
+@media (max-width: 650px) {
+  .sliderContainer .content .container > span h1 {
+    font-size: 60px;
+  }
+}
+@media (max-width: 550px) {
+  .sliderContainer .content .container > span h1 {
+    font-size: 40px;
+  }
+}
+.sliderContainer .content .container .desk {
+  font-size: 18px;
+  text-align: start;
+  line-height: 1.6;
+}
+.sliderContainer .content .container .btn_to_category {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 34px;
+  padding: 7px 15px;
+  border-radius: 5px;
+  background: rgba(241, 54, 87, 0.8);
+  color: white;
+  width: auto;
+}

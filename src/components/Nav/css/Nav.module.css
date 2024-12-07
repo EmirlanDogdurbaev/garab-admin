@@ -1,0 +1,202 @@
+@charset "UTF-8";
+.Nav {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  background-color: #212529;
+}
+.Nav .mobileMenu {
+  width: 350px;
+  min-height: 100vh;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: -100%;
+  z-index: 10;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  -webkit-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+          transform: translateX(100%);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  -webkit-box-shadow: inset 3px 0 4px 1px rgba(179, 179, 179, 0.48);
+  box-shadow: inset 3px 0 4px 1px rgba(179, 179, 179, 0.48);
+}
+.Nav .mobileMenu.active {
+  -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: translateX(0); /* Выдвигает меню в видимую область */
+  opacity: 1;
+  right: 0;
+}
+.Nav .mobileMenu div {
+  width: 80%;
+  margin: 10px auto 20px;
+}
+.Nav .mobileMenu ul {
+  width: 80%;
+  margin: 0 auto;
+  height: 800px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  gap: 30px;
+}
+.Nav .mobileMenu ul li a {
+  color: black;
+  padding: 0;
+}
+.Nav .bottom_nav {
+  max-width: 1350px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 30px;
+  height: 80px;
+  width: 100%;
+}
+.Nav .bottom_nav nav {
+  width: 1350px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 auto;
+  position: relative;
+}
+@media (max-width: 1280px) {
+  .Nav .bottom_nav nav {
+    width: 1280px;
+  }
+}
+.Nav .bottom_nav nav .burger {
+  display: none;
+}
+.Nav .bottom_nav nav ul {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  row-gap: 10px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  gap: 20px;
+}
+.Nav .bottom_nav nav ul li a {
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+}
+@media (max-width: 1010px) {
+  .Nav .bottom_nav nav ul {
+    display: none;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1000px;
+    background-color: red;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  .Nav .bottom_nav nav .burger {
+    display: block;
+  }
+  .Nav .bottom_nav nav .mobileMenu {
+    display: block;
+    width: 600px;
+    min-height: 100vh;
+    background-color: red;
+  }
+}
+
+.languageSelector {
+  position: relative;
+  cursor: pointer;
+  color: white;
+}
+.languageSelector:hover .dropdownMenu {
+  display: block;
+  background-color: transparent;
+  color: black;
+  height: 140px;
+  padding: 10px 0;
+  z-index: 100;
+}
+
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: -10px;
+  background-color: #fff;
+  z-index: 10;
+  border-radius: 15px;
+}
+
+.inner {
+  background-color: white;
+  width: 100%;
+  padding: 10px 4px;
+  border-radius: 15px;
+}
+.inner div {
+  padding: 8px 12px;
+  cursor: pointer;
+  text-align: left;
+}
+.inner div:hover {
+  color: #ff6f61;
+}
+
+.inner.custom {
+  min-width: 280px;
+}

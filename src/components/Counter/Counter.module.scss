@@ -1,0 +1,15 @@
+.Counter {
+  margin: 0 auto;
+  max-width: 1440px;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 70px 0;
+}
+
+@media (max-width: 599px) {
+  .Counter {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+}

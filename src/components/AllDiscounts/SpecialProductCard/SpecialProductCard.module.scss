@@ -1,0 +1,110 @@
+.SpecialProductCard {
+  max-width: 2560px;
+  margin: 0 auto;
+  padding: 20px 0;
+
+  .title {
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      color: #212529;
+      font-size: 30px;
+      font-style: normal;
+      font-weight: 600;
+      text-align: center;
+
+      @media (max-width: 768px) {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .btn_cont {
+    margin: 0 auto;
+    max-width: 1350px;
+    display: flex;
+    gap: 20px;
+
+    @media (max-width: 1280px) {
+      padding: 0 30px;
+
+    }
+
+
+    .arrow_left, .arrow_right {
+      padding: 10px 30px;
+      background-color: #ffffff;
+      z-index: 2;
+      border: none;
+      color: #212529;
+      transition: background-color 0.3s ease, opacity 0.3s ease; 
+    }
+    
+    .arrow_left:hover, .arrow_right:hover {
+      background-color: #e0e0e0;
+      opacity: 0.9; 
+    }
+    
+    
+  }
+
+  .slides {
+    max-width: 1350px;
+    margin: 0 auto;
+    padding: 40px 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+
+
+    .slide {
+      width: 695px;
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .slides {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .slide {
+      width: 700px;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .slides {
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+
+    .slide {
+      width: 350px !important;;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .slides {
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+
+    .slide {
+      width: 350px !important;;
+      margin: 0 auto;
+    }
+  }
+}

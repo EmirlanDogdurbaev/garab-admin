@@ -1,0 +1,212 @@
+.main {
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.AllProducts {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 0;
+  background-color: #ffffff;
+
+  .search {
+    display: flex;
+    gap: 10px;
+
+    .filter {
+      max-width: 170px;
+      border-radius: 100px;
+      flex-shrink: 1;
+      flex-grow: 1;
+      background: #212529;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: none;
+      text-transform: capitalize;
+      font-size: 16px;
+    }
+
+    .add_btn {
+      padding: 10px 20px;
+      min-width: 200px;
+      border: 1px solid #4759ff;
+      border-radius: 5px;
+      background-color: #4759ff;
+      color: white;
+
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+      a {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .tableContainer {
+    min-height: 670px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 20px 0;
+  }
+
+  .title {
+    max-width: 650px !important;
+    word-break: break-word;
+    line-height: 1.6;
+  }
+
+  .customTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .customTable th,
+  .customTable td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .customTable th {
+    background-color: #f4f6fa;
+    font-weight: bold;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .actionButton {
+    background-color: #f0f4ff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    padding: 20px;
+  }
+
+  .actionButton:hover {
+    background-color: #e0e8ff;
+  }
+
+  .actionButton svg {
+    color: #6b7cff;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+
+    button {
+      border: none;
+      background: none;
+      font-size: 22px;
+      color: #444;
+      cursor: pointer;
+      transition: color 0.3s;
+
+      &.active {
+        color: #f4a261;
+        font-weight: bold;
+      }
+
+      &:hover:not(.active) {
+        color: #888;
+      }
+
+      &:disabled {
+        color: #ccc;
+        cursor: default;
+      }
+    }
+  }
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* затемнение фона */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modalContent p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.confirmButton,
+.cancelButton {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+.confirmButton {
+  background-color: #d9534f; /* красный для подтверждения */
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.confirmButton:hover {
+  background-color: #c9302c;
+}
+
+.cancelButton {
+  background-color: #f0f0f0; /* серый для отмены */
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: #e0e0e0;
+}
+
+
+.titleMain{
+  max-width: 1400px;
+  margin: 0 auto;
+  margin: 20px 0;
+}

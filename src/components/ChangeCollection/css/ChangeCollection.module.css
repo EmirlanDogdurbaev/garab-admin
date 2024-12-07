@@ -1,0 +1,231 @@
+.ChangeCollection {
+  max-width: 1350px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+  padding: 20px 0;
+}
+.ChangeCollection .line {
+  height: 5px;
+  width: 100%;
+  background: #d0d0d2;
+}
+.ChangeCollection .title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+.ChangeCollection .title h2 {
+  font-size: 20px;
+}
+.ChangeCollection .info_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+  padding: 20px 0;
+}
+.ChangeCollection .info_container h4 {
+  font-size: 18px;
+}
+.ChangeCollection .info_container span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 30px;
+}
+.ChangeCollection .info_container span label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+.ChangeCollection .info_container span label h5 {
+  font-size: 16px;
+}
+.ChangeCollection .info_container span label input {
+  width: 450px;
+  border-radius: 8px;
+  border: 1px solid #CACACA;
+  padding: 10px;
+}
+.ChangeCollection .info_container .textarea {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+.ChangeCollection .info_container .textarea h5 {
+  font-size: 16px;
+}
+.ChangeCollection .info_container .textarea textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #CACACA;
+}
+.ChangeCollection .container {
+  padding: 20px;
+}
+.ChangeCollection .filters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+.ChangeCollection .filters .group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+.ChangeCollection .filters .group p {
+  font-weight: bold;
+}
+.ChangeCollection .filters .group label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+.ChangeCollection .filters .group label input {
+  accent-color: #007bff;
+}
+.ChangeCollection .photos {
+  margin-top: 20px;
+}
+.ChangeCollection .photos p {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.ChangeCollection .photos .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+.ChangeCollection .photos .cardWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 10px;
+}
+.ChangeCollection .photos .card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background: #f0f0f0;
+  border: 1px dashed #ccc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.ChangeCollection .photos .card button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.ChangeCollection .photos .card img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.ChangeCollection .photos .colors {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 10px;
+}
+.ChangeCollection .photos .colorCheckbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+}
+.ChangeCollection .photos .colorCheckbox input[type=radio] {
+  accent-color: #007bff;
+}
+.ChangeCollection .photos .colorCheckbox span {
+  font-size: 14px;
+  cursor: pointer;
+}
+.ChangeCollection .photos .colorCheckbox .black {
+  color: #000;
+}
+.ChangeCollection .photos .colorCheckbox .green {
+  color: #008000;
+}
+.ChangeCollection .photos .colorCheckbox .blue {
+  color: #007bff;
+}
+.ChangeCollection .photos .colorCheckbox .red {
+  color: #ff0000;
+}
+.ChangeCollection .saveButton {
+  width: 100%;
+  display: block;
+  margin: 20px auto 0;
+  padding: 15px 20px;
+  background-color: #4759FF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}

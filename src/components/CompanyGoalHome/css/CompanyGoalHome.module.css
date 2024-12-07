@@ -1,0 +1,120 @@
+.wrapper {
+  max-width: 2560px;
+  height: 260px;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 auto;
+}
+.wrapper .inbox {
+  max-width: 1350px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 40px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.wrapper .right {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.wrapper .line {
+  width: 0;
+  height: 90px;
+  border: 1px solid #F13657;
+}
+.wrapper .left {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.wrapper .left span {
+  font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+  .wrapper .inbox {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    gap: 25px;
+  }
+  .wrapper .inbox .left {
+    font-size: 16px;
+    display: block;
+    max-width: 220px;
+    line-height: 1.6;
+  }
+  .wrapper .inbox .right {
+    font-size: 14px;
+    display: block;
+    max-width: 60%;
+  }
+}
+@media (max-width: 800px) {
+  .wrapper .inbox {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    gap: 25px;
+  }
+  .wrapper .inbox .left {
+    font-size: 14px;
+    display: block;
+    max-width: 220px;
+    line-height: 1.6;
+  }
+  .wrapper .inbox .right {
+    font-size: 14px;
+    display: block;
+    max-width: 60%;
+  }
+}
+@media (max-width: 650px) {
+  .wrapper {
+    height: auto;
+    padding: 30px 0;
+  }
+  .wrapper .inbox {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 15px;
+  }
+  .wrapper .inbox .line {
+    height: 2px;
+    width: 90px;
+    border: 1px solid #F13657;
+  }
+  .wrapper .inbox .left {
+    font-size: 14px;
+    display: block;
+    max-width: 500px;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .wrapper .inbox .right {
+    font-size: 14px;
+    display: block;
+    max-width: 95%;
+    text-align: center;
+  }
+}

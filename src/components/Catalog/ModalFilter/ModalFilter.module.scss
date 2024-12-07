@@ -1,0 +1,230 @@
+/* Общие стили для модального окна */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: overlayFadeIn 0.5s ease-out forwards;
+    transition: background-color 0.3s ease-out;
+  }
+  
+  .wrap {
+    background-color: white;
+    padding: 10px;
+    border-radius: 40px;
+    position: relative;
+    width: 420px;
+    height: 470px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+    animation: slideInFromRight 0.5s ease-out forwards;
+  }
+  
+  .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 340px;
+    gap: 40px;
+  }
+  
+  .vals {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .vals p{
+    padding-left: 15px;
+  }
+  
+  .vals input {
+    width: 170px;
+    height: 40px;
+    background-color: #F5F5F5;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  
+  .buttons {
+    display: flex;
+    flex-direction: row ;
+    justify-content: end;
+    gap: 10px;
+    width: 100%;
+  
+    .btn1 {
+      width: 170px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+  
+    .btn2 {
+      width: 170px;
+      height: 40px;
+      background: #212529; 
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      color: white;
+      font-weight: 500;
+    }
+  }
+
+  .exitIcon {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    cursor: pointer;
+  }
+
+  .range{
+    width: 100%;
+
+    p{
+        margin-bottom: 10px;
+        font-weight: 500;
+        font-size: 22px;
+    }
+   
+  }
+
+  /* Анимации */
+  @keyframes slideInFromRight {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideOutToLeft {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-200%);
+    }
+  }
+  
+  @keyframes overlayFadeIn {
+    0% {
+      background-color: rgba(0, 0, 0, 0);
+    }
+    100% {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  }
+  
+  @keyframes overlayFadeOut {
+    0% {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    100% {
+      background-color: rgba(0, 0, 0, 0);
+    }
+  }
+  
+  /* Стили для закрытия (fade out) */
+  .overlay.fadeOut {
+    animation: overlayFadeOut 0.3s ease-in forwards;
+  }
+  
+  .wrap.fadeOutWrap {
+    animation: slideOutToLeft 0.5s ease-in forwards;
+  }
+  
+
+  /* Стили для радиокнопок */
+.radios {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 22px;
+  }
+
+  .radios span{
+    display: flex;
+  }
+  
+  .radios input[type="radio"] {
+    appearance: none; /* Убираем стандартный стиль */
+    -webkit-appearance: none; /* Для Safari */
+    -moz-appearance: none; /* Для Firefox */
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #f13657; /* Красная рамка */
+    background-color: white; /* Белый фон */
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease; /* Плавные анимации */
+  }
+  
+  .radios input[type="radio"]:checked {
+    background-color: #f13657; /* Красный цвет при нажатии */
+    border-color: #f13657;
+  }
+  
+ 
+  
+  .radios p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-left: 10px; /* Отступ от радиокнопки */
+    cursor: pointer;
+  }
+  
+  /* Эффект на фокус */
+  .radios input[type="radio"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(241, 54, 87, 0.3); /* Красное свечение при фокусе */
+  }
+  
+
+
+
+  @media screen and (max-width:620px) {
+    .wrap{
+        width: 360px;
+    }
+    .box{
+        width: 320px;
+    }
+    .vals input{
+        width: 160px;
+    }
+    
+  }
+  
+
+  @media screen and (max-width:330px) {
+    .wrap{
+        width: 300px;
+    }
+    .box{
+        width: 270px;
+    }
+    .vals input{
+        width: 135px;
+    }
+    
+  }

@@ -1,0 +1,40 @@
+.category_slider {
+  width: 98%;
+  margin: 0 auto;
+  padding: 10px 0;
+  position: relative;
+  display: flex;
+
+  .category_swiper {
+    padding: 0 40px;
+  }
+
+  .categorySlide {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+
+    button{
+      background-color: #F5F5F5;
+    }
+  }
+
+  .categoryButton {
+    padding: 10px 20px;
+    border: none;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid transparent;
+    white-space: nowrap;
+
+
+    &.active {
+      border-bottom: 1px solid red;
+    }
+  }
+
+
+}

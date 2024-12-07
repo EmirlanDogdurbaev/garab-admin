@@ -1,0 +1,190 @@
+.AllCollections {
+  padding: 30px 0;
+  background-color: #FFFFFF;
+
+  .search {
+    padding: 30px 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+
+
+
+    .add_btn {
+      padding: 10px 20px;
+      min-width: 200px;
+      border: 1px solid #4759FF;
+      border-radius: 5px;
+      background-color: #4759FF;
+      color: white;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+    }
+  }
+
+  .tableContainer {
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 670px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 20px 0;
+  }
+
+  .title {
+    max-width: 650px !important;
+    word-break: break-word;
+    line-height: 1.6;
+  }
+
+  .customTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .customTable th, .customTable td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #ddd;
+
+  }
+
+  .customTable th {
+    background-color: #f4f6fa;
+    font-weight: bold;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+  }
+
+  .actionButton {
+    background-color: #f0f4ff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    padding: 20px;
+  }
+
+  .actionButton:hover {
+    background-color: #e0e8ff;
+  }
+
+  .actionButton svg {
+    color: #6b7cff;
+  }
+
+
+  .pagination {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+
+    button {
+      border: none;
+      background: none;
+      font-size: 22px;
+      color: #444;
+      cursor: pointer;
+      transition: color 0.3s;
+
+      &.active {
+        color: #f4a261;
+        font-weight: bold;
+      }
+
+      &:hover:not(.active) {
+        color: #888;
+      }
+
+      &:disabled {
+        color: #ccc;
+        cursor: default;
+      }
+    }
+  }
+
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .modalContent {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .modalActions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+
+      &.confirmButton {
+        background-color: #d9534f;
+        color: #fff;
+
+        &:hover {
+          background-color: #c9302c;
+        }
+      }
+
+      &.cancelButton {
+        background-color: #6c757d;
+        color: #fff;
+
+        &:hover {
+          background-color: #5a6268;
+        }
+      }
+    }
+  }
+}
+
+
+.titleMain{
+  width: 1400px;
+  margin: 0 auto;
+
+}

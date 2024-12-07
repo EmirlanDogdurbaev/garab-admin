@@ -1,0 +1,51 @@
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0 40px;
+  h3 {
+    font-size: 24px;
+    font-weight: 500;
+  }
+}
+
+.Brands {
+  width: 100%;
+  background-color: #E0E0E2;
+}
+
+.marquee {
+  max-width: 1440px;
+  height: 238px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px 0;
+
+  .marqueeContent {
+    display: flex;
+    align-items: center;
+    animation: marquee 20s linear infinite;
+  }
+
+  .logo {
+    min-height: 100px;
+    height: 100%;
+    width: auto;
+    margin: 0 15px;
+    border-right: 1px solid #21252926;
+    padding-right: 30px;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

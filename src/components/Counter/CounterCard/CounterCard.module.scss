@@ -1,0 +1,23 @@
+.CounterCard {
+  width: auto;
+  text-align: center;
+
+  h3 {
+    color: #212529;
+    font-family: "Montserrat Alternates";
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .CounterCard {
+
+    h3 {
+      font-size: 25px;
+    }
+  }
+}

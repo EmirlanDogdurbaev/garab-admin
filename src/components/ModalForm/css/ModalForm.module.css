@@ -1,0 +1,378 @@
+@charset "UTF-8";
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 999;
+  -webkit-animation: overlayFadeIn 0.5s ease-out forwards;
+          animation: overlayFadeIn 0.5s ease-out forwards; /* Анимация появления фона */
+  -webkit-transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out; /* Плавное исчезновение фона */
+}
+
+.wrap {
+  background-color: white;
+  padding: 30px;
+  border-radius: 40px;
+  position: relative;
+  width: 620px;
+  height: 620px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+          transform: translateX(100%); /* Начальная позиция — справа от экрана */
+  -webkit-animation: slideInFromRight 0.5s ease-out forwards;
+          animation: slideInFromRight 0.5s ease-out forwards; /* Анимация появления окна */
+}
+
+.overlay.fadeOut {
+  -webkit-animation: overlayFadeOut 0.3s ease-in forwards;
+          animation: overlayFadeOut 0.3s ease-in forwards; /* Плавное исчезновение фона */
+}
+
+.wrap.fadeOutWrap {
+  -webkit-animation: slideOutToLeft 0.5s ease-in forwards;
+          animation: slideOutToLeft 0.5s ease-in forwards; /* Анимация сдвига окна влево */
+}
+
+.exitIcon {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+}
+
+.buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  gap: 10px;
+}
+.buttons .btn1 {
+  width: 170px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+.buttons .btn2 {
+  width: 170px;
+  height: 40px;
+  background: #212529;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  font-weight: 500;
+}
+
+.box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+  width: 520px;
+}
+.box div {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+}
+.box div input {
+  width: 100%;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin-top: 5px;
+}
+.box div textarea {
+  height: 160px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.Maintitle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.error {
+  color: #F13657;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Добавьте это в ваш файл стилей */
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #aaa; /* Цвет плейсхолдера по умолчанию */
+}
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #aaa; /* Цвет плейсхолдера по умолчанию */
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #aaa; /* Цвет плейсхолдера по умолчанию */
+}
+input::-ms-input-placeholder, textarea::-ms-input-placeholder {
+  color: #aaa; /* Цвет плейсхолдера по умолчанию */
+}
+input::placeholder,
+textarea::placeholder {
+  color: #aaa; /* Цвет плейсхолдера по умолчанию */
+}
+
+/* Стили для ошибки в плейсхолдерах */
+input.error::-webkit-input-placeholder, textarea.error::-webkit-input-placeholder {
+  color: #F13657; /* Цвет текста ошибки */
+}
+input.error::-moz-placeholder, textarea.error::-moz-placeholder {
+  color: #F13657; /* Цвет текста ошибки */
+}
+input.error:-ms-input-placeholder, textarea.error:-ms-input-placeholder {
+  color: #F13657; /* Цвет текста ошибки */
+}
+input.error::-ms-input-placeholder, textarea.error::-ms-input-placeholder {
+  color: #F13657; /* Цвет текста ошибки */
+}
+input.error::placeholder,
+textarea.error::placeholder {
+  color: #F13657; /* Цвет текста ошибки */
+}
+
+@-webkit-keyframes slideInFromRight {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+@-webkit-keyframes slideOutToLeft {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-200%);
+            transform: translateX(-200%);
+  }
+}
+@keyframes slideOutToLeft {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-200%);
+            transform: translateX(-200%);
+  }
+}
+@-webkit-keyframes overlayFadeIn {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes overlayFadeIn {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+@-webkit-keyframes overlayFadeOut {
+  0% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+@keyframes overlayFadeOut {
+  0% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+@media screen and (max-width: 376px) {
+  .wrap {
+    width: 320px;
+    height: 580px;
+    padding: 10px;
+    padding-top: 50px;
+    border-radius: 20px;
+  }
+  .box {
+    width: 300px;
+    gap: 10px;
+  }
+  .box textarea {
+    max-height: 80px;
+  }
+}
+.buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.exitIcon {
+  top: 20px;
+  right: 20px;
+}
+
+.Maintitle {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+@media screen and (max-width: 426px) {
+  .wrap {
+    width: 320px;
+    height: 580px;
+    padding: 10px;
+    padding-top: 50px;
+    border-radius: 20px;
+  }
+  .box {
+    width: 300px;
+    gap: 10px;
+  }
+  .box textarea {
+    max-height: 80px;
+  }
+}
+.buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.exitIcon {
+  top: 20px;
+  right: 20px;
+}
+
+.Maintitle {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+@media screen and (max-width: 326px) {
+  .wrap {
+    width: 300px;
+    height: 580px;
+    padding: 10px;
+    padding-top: 50px;
+    border-radius: 20px;
+  }
+  .box {
+    width: 280px;
+    gap: 10px;
+  }
+  .box textarea {
+    max-height: 80px;
+  }
+}
+.buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.exitIcon {
+  top: 20px;
+  right: 20px;
+}
+
+.Maintitle {
+  font-size: 18px;
+  margin: 20px 0;
+}

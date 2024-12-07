@@ -1,0 +1,118 @@
+.SpecialProductCard {
+  max-width: 2560px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.SpecialProductCard .title {
+  padding: 40px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.SpecialProductCard .title h2 {
+  color: #212529;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .SpecialProductCard .title h2 {
+    font-size: 24px;
+  }
+}
+.SpecialProductCard .btn_cont {
+  margin: 0 auto;
+  max-width: 1350px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+@media (max-width: 1280px) {
+  .SpecialProductCard .btn_cont {
+    padding: 0 30px;
+  }
+}
+.SpecialProductCard .btn_cont .arrow_left, .SpecialProductCard .btn_cont .arrow_right {
+  padding: 10px 30px;
+  background-color: #ffffff;
+  z-index: 2;
+  border: none;
+  color: #212529;
+}
+.SpecialProductCard .slides {
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 40px 0;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.SpecialProductCard .slides .slide {
+  width: 695px;
+}
+
+@media (max-width: 1280px) {
+  .slides {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .slides .slide {
+    width: 700px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 550px) {
+  .slides {
+    width: 85%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin: 0 auto;
+  }
+  .slides .slide {
+    width: 350px !important;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 400px) {
+  .slides {
+    width: 85%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin: 0 auto;
+  }
+  .slides .slide {
+    width: 350px !important;
+    margin: 0 auto;
+  }
+}
