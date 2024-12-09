@@ -1,15 +1,15 @@
-import {useDispatch, useSelector} from "react-redux";
-import {setPage} from "../../store/slices/paginationSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { setPage } from "../../store/slices/paginationSlice.js";
 import styles from "./AllCategory.module.scss";
-import {useEffect} from "react";
-import {deleteCategory, fetchCategories} from "../../store/slices/getCategories.js";
-import {Link} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { deleteCategory, fetchCategories } from "../../store/slices/getCategories.js";
+import { Link } from "react-router-dom";
 
 const AllCategory = () => {
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.categories.categories);
 
-    const {currentPage, itemsPerPage} = useSelector((state) => state.pagination);
+    const { currentPage, itemsPerPage } = useSelector((state) => state.pagination);
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -17,26 +17,52 @@ const AllCategory = () => {
 
     const totalPages = Math.ceil(categories.length / itemsPerPage);
 
+    const [modal, setModal] = useState({
+        show: false,
+        categoryId: null,
+    });
+
+    const [notification, setNotification] = useState({
+        show: false,
+        message: "",
+    });
+
     const handlePageChange = (page) => {
         dispatch(setPage(page));
     };
 
     useEffect(() => {
-        dispatch(fetchCategories())
+        dispatch(fetchCategories());
     }, [dispatch]);
 
-    console.log(currentItems)
+    const openModal = (id) => {
+        setModal({ show: true, categoryId: id });
+    };
 
+    const closeModal = () => {
+        setModal({ show: false, categoryId: null });
+    };
 
-    const handleDelete = (id) => {
-        dispatch(deleteCategory(id))
+    const confirmDelete = () => {
+        dispatch(deleteCategory(modal.categoryId))
             .unwrap()
             .then(() => {
-                alert("Категория успешно удалена");
+                setNotification({
+                    show: true,
+                    message: "Категория успешно удалена",
+                });
+                dispatch(fetchCategories());
             })
             .catch((error) => {
-                console.error("Ошибка при удалении коллекции:", error);
-                alert(error.message || "Не удалось удалить коллекцию.");
+                console.error("Ошибка при удалении категории:", error);
+                setNotification({
+                    show: true,
+                    message: "Не удалось удалить категорию",
+                });
+            })
+            .finally(() => {
+                closeModal();
+                setTimeout(() => setNotification({ show: false, message: "" }), 3000);
             });
     };
 
@@ -44,7 +70,9 @@ const AllCategory = () => {
         <div className={styles.container}>
             <header className={styles.header}>
                 <h1>Категория</h1>
-                <Link to={"/admin/add-category"} className={styles.addButton}>+ Добавить новую категорию</Link>
+                <Link to={"/admin/add-category"} className={styles.addButton}>
+                    + Добавить новую категорию
+                </Link>
             </header>
 
             <div className={styles.grid}>
@@ -52,29 +80,28 @@ const AllCategory = () => {
                     <div key={category.id} className={styles.card}>
                         <p>{category.name}</p>
                         <div className={styles.actions}>
-                            <Link to={`/admin/update-category/${category.id}`} className={styles.editButton} >
+                            <Link to={`/admin/update-category/${category.id}`} className={styles.editButton}>
                                 <span>✏️</span>
                             </Link>
                             <button
                                 className={styles.deleteButton}
-                                onClick={() => handleDelete(category.id)}
+                                onClick={() => openModal(category.id)}
                             >
                                 <span>🗑️</span>
                             </button>
-
                         </div>
                     </div>
                 ))}
             </div>
 
             <div className={styles.pagination}>
-            <button
+                <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
                 >
                     ←
                 </button>
-                {Array.from({length: totalPages}, (_, index) => (
+                {Array.from({ length: totalPages }, (_, index) => (
                     <button
                         key={index + 1}
                         onClick={() => handlePageChange(index + 1)}
@@ -91,8 +118,36 @@ const AllCategory = () => {
                 </button>
             </div>
 
+            {/* Модальное окно */}
+            {modal.show && (
+                <div className={styles.modal}>
+                    <div className={styles.modalContent}>
+                        <div className={styles.modalHeader}>
+                            <span className={styles.modalIcon}>⚠️</span>
+                            <h3>Удалить категорию</h3>
+                        </div>
+                        <p>Вы уверены, что хотите удалить категорию? Это действие нельзя отменить.</p>
+                        <div className={styles.modalActions}>
+                            <button onClick={closeModal} className={styles.cancelButton}>
+                                Закрыть
+                            </button>
+                            <button onClick={confirmDelete} className={styles.deleteButton}>
+                                Удалить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Уведомление */}
+            {notification.show && (
+                <div className={styles.notification}>
+                    <span>{notification.message}</span>
+                    <button onClick={() => setNotification({ show: false, message: "" })}>×</button>
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default AllCategory;

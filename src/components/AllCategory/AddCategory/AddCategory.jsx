@@ -2,15 +2,23 @@ import styles from "./AddCategory.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { createCategory } from "../../../store/slices/getCategories.js";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddCategory = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { status, error } = useSelector((state) => state.categories);
 
     const [data, setData] = useState({
         ru: "",
         en: "",
         kgz: "",
+    });
+
+    const [modal, setModal] = useState({
+        show: false,
+        message: "",
+        type: "", // success or error
     });
 
     const handleInputChange = (event, language) => {
@@ -20,11 +28,11 @@ const AddCategory = () => {
         }));
     };
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
 
         if (!data.ru.trim() || !data.en.trim() || !data.kgz.trim()) {
-            alert("Заполните все поля!");
+            setModal({ show: true, message: "Заполните все поля!", type: "error" });
             return;
         }
 
@@ -34,8 +42,21 @@ const AddCategory = () => {
             { language_code: "kgz", name: data.kgz },
         ];
 
-        dispatch(createCategory(category_list));
-        setData({ ru: "", en: "", kgz: "" });
+        try {
+            await dispatch(createCategory(category_list)).unwrap();
+            setModal({ show: true, message: "Категория успешно создана!", type: "success" });
+        } catch (err) {
+            setModal({ show: true, message: "Ошибка при создании категории. Попробуйте снова.", type: "error" });
+        }
+    };
+
+    const handleCloseModal = () => {
+        setModal({ show: false, message: "", type: "" });
+
+        if (modal.type === "success") {
+            // Перенаправление на список категорий
+            navigate("/admin/all-category");
+        }
     };
 
     return (
@@ -77,8 +98,19 @@ const AddCategory = () => {
                 <button type="submit" disabled={status === "loading"}>
                     {status === "loading" ? "Сохраняем..." : "Сохранить"}
                 </button>
-                {error && <p className={styles.error}>Ошибка: {error}</p>}
             </form>
+
+            {/* Модальное окно */}
+            {modal.show && (
+                <div className={styles.modal}>
+                    <div className={`${styles.modalContent} ${styles[modal.type]}`}>
+                        <p>{modal.message}</p>
+                        <button onClick={handleCloseModal} className={styles.modalButton}>
+                            ОК
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

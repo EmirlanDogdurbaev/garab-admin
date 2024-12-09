@@ -1,17 +1,20 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {deleteBrand, fetchBrands} from "../../store/slices/admin/brands/brands.js";
 import styles from "./AllBrands.module.scss";
 import {Link} from "react-router-dom";
 import {setPage} from "../../store/slices/paginationSlice.js";
 
 const AllBrands = () => {
-
     const dispatch = useDispatch();
     const all = useSelector((state) => state.brands.brands);
-
-
     const {currentPage, itemsPerPage} = useSelector((state) => state.pagination);
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
+    const [selectedBrandId, setSelectedBrandId] = useState(null);
+
+    const [successNotification, setSuccessNotification] = useState(false);
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -24,26 +27,39 @@ const AllBrands = () => {
     };
 
     useEffect(() => {
-        dispatch(fetchBrands())
-    }, [dispatch])
+        dispatch(fetchBrands());
+    }, [dispatch]);
 
+    const handleDeleteConfirmation = (id) => {
+        setSelectedBrandId(id);
+        setModalMessage("Вы уверены, что хотите удалить клиента? Это действие нельзя отменить.");
+        setShowDeleteModal(true);
+    };
 
-    const handleDelete = (id) => {
-        dispatch(deleteBrand(id))
+    const handleDelete = () => {
+        if (!selectedBrandId) return;
+
+        dispatch(deleteBrand(selectedBrandId))
             .unwrap()
             .then(() => {
-                alert("Категория успешно удалена");
-                dispatch(fetchBrands())
+                setSuccessNotification(true);
+                setTimeout(() => setSuccessNotification(false), 3000);
+                dispatch(fetchBrands());
             })
             .catch((error) => {
-                console.error("Ошибка при удалении коллекции:", error);
-                alert(error.message || "Не удалось удалить коллекцию.");
+                console.error("Ошибка при удалении клиента:", error);
+                alert(error.message || "Не удалось удалить клиента.");
+            })
+            .finally(() => {
+                setShowDeleteModal(false);
+                setSelectedBrandId(null);
             });
     };
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <h1>Клиенты </h1>
+                <h1>Клиенты</h1>
                 <Link to={"/admin/create-brand"} className={styles.addButton}>+ Добавить новую карточку клиента</Link>
             </header>
 
@@ -53,15 +69,14 @@ const AllBrands = () => {
                         <p>{brand.name}</p>
                         <div className={styles.actions}>
                             <Link to={`/admin/update-brand/${brand.id}`} className={styles.editButton}>
-                                <span>✏️</span>
+                                ✏️
                             </Link>
                             <button
                                 className={styles.deleteButton}
-                                onClick={() => handleDelete(brand.id)}
+                                onClick={() => handleDeleteConfirmation(brand.id)}
                             >
-                                <span>🗑️</span>
+                                🗑️
                             </button>
-
                         </div>
                     </div>
                 ))}
@@ -91,6 +106,41 @@ const AllBrands = () => {
                 </button>
             </div>
 
+            {/* Модальное окно подтверждения удаления */}
+            {showDeleteModal && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modal}>
+                        <p>{modalMessage}</p>
+                        <div className={styles.modalActions}>
+                            <button
+                                onClick={() => setShowDeleteModal(false)}
+                                className={styles.cancelButton}
+                            >
+                                Закрыть
+                            </button>
+                            <button
+                                onClick={handleDelete}
+                                className={styles.deleteButton}
+                            >
+                                Удалить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Уведомление об успешном удалении */}
+            {successNotification && (
+                <div className={styles.notification}>
+                    Клиент успешно удален
+                    <button
+                        onClick={() => setSuccessNotification(false)}
+                        className={styles.closeNotification}
+                    >
+                        ✖
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

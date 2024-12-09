@@ -67,7 +67,7 @@ const Nav = () => {
                             <Link to={"/admin/all-products"}>Все товары</Link>
                         </li>
                         <li>
-                            <Link to={"/admin/discount"}>Акции</Link>
+                            <Link to={"/admin/all-discount"}>Акции</Link>
                         </li>
                         <li>
                             <Link to={"/admin/all-collections"}>Коллекции</Link>

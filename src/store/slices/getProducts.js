@@ -176,6 +176,23 @@ export const deleteProductById = createAsyncThunk(
     }
 );
 
+export const deleteDiscountById = createAsyncThunk(
+    'products/deleteDiscountById',
+    async (id, {rejectWithValue}) => {
+        try {
+            const response = await axios.delete(`${API_URI}/discount`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+                data: {id},
+            });
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
+
 
 const productsSlice = createSlice({
     name: 'products',
@@ -226,6 +243,22 @@ const productsSlice = createSlice({
             .addCase(deleteProductById.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data = state.data.filter((item) => item.id !== action.meta.arg);
+            })
+            .addCase(deleteDiscountById.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(deleteDiscountById.rejected, (state, action) => {
+                state.loading = false;
+                if (action.payload) {
+                    state.error = action.payload;
+                } else {
+                    state.error = action.error.message || "Произошла ошибка";
+                }
+            })
+            .addCase(deleteDiscountById.fulfilled, (state, action) => {
+                state.loading = false;
+                state.discount = state.discount.filter((item) => item.id !== action.meta.arg);
             })
             .addCase(fetchProducts.pending, (state) => {
                 state.loading = true;

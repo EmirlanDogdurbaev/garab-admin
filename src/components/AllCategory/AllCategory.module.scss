@@ -111,3 +111,116 @@
     }
   }
 }
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 10px;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  padding: 40px;
+}
+
+.modalHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+
+}
+
+.modalIcon {
+  font-size: 40px;
+  color: red;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px;
+
+}
+
+.cancelButton {
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancelButton:hover {
+  background: #e0e0e0;
+}
+
+.deleteButton {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background: #d32f2f;
+}
+
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ffd700; /* Желтый цвет */
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #333;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+  animation: fadeInOut 3s forwards;
+}
+
+.notification button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  10%,
+  90% {
+    opacity: 1;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}

@@ -1,45 +1,46 @@
-import {useDispatch} from "react-redux";
-import {useState} from "react";
-import {createVacancy} from "../../../store/slices/getVacancy.js";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createVacancy } from "../../../store/slices/getVacancy.js";
+import { useNavigate } from "react-router-dom";
 import styles from "./CreateVacancy.module.scss";
 
 const CreateVacancy = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    // Инициализация данных для каждого языка
     const [data, setData] = useState({
-            "salary": 0,
-            "isActive": true,
-            "vacancy": [
-                {
-                    "language_code": "en",
-                    "title": " ",
-                    "requirements": [""],
-                    "responsibilities": [""],
-                    "conditions": [""],
-                    "information": [""]
-                },
-                {
-                    "language_code": "ru",
-                    "title": "",
-                    "requirements": [""],
-                    "responsibilities": [""],
-                    "conditions": [""],
-                    "information": [""]
-                },
-                {
-                    "language_code": "kgz",
-                    "title": "",
-                    "requirements": [""],
-                    "responsibilities": [""],
-                    "conditions": [""],
-                    "information": [""]
-                }
-            ]
-        }
-    );
+        salary: 0,
+        isActive: true,
+        vacancy: [
+            {
+                language_code: "en",
+                title: "",
+                requirements: [""],
+                responsibilities: [""],
+                conditions: [""],
+                information: [""],
+            },
+            {
+                language_code: "ru",
+                title: "",
+                requirements: [""],
+                responsibilities: [""],
+                conditions: [""],
+                information: [""],
+            },
+            {
+                language_code: "kgz",
+                title: "",
+                requirements: [""],
+                responsibilities: [""],
+                conditions: [""],
+                information: [""],
+            },
+        ],
+    });
 
-    // Обработчик для изменения данных в массиве `vacancy` по языку
+    const [modal, setModal] = useState({ show: false, message: "", type: "", actions: null });
+
     const handleChange = (e, language, field, index = null) => {
         const value = e.target.value;
 
@@ -58,31 +59,28 @@ const CreateVacancy = () => {
         }));
     };
 
-    // Добавить новую строку в массив (например, для "requirements")
     const handleAddItem = (language, field) => {
         setData((prevData) => ({
             ...prevData,
             vacancy: prevData.vacancy.map((v) =>
                 v.language_code === language
-                    ? {...v, [field]: [...v[field], ""]}
+                    ? { ...v, [field]: [...v[field], ""] }
                     : v
             ),
         }));
     };
 
-    // Удалить строку из массива
     const handleRemoveItem = (language, field, index) => {
         setData((prevData) => ({
             ...prevData,
             vacancy: prevData.vacancy.map((v) =>
                 v.language_code === language
-                    ? {...v, [field]: v[field].filter((_, i) => i !== index)}
+                    ? { ...v, [field]: v[field].filter((_, i) => i !== index) }
                     : v
             ),
         }));
     };
 
-    // Обработчик изменения зарплаты
     const handleSalaryChange = (e) => {
         setData((prevData) => ({
             ...prevData,
@@ -90,11 +88,9 @@ const CreateVacancy = () => {
         }));
     };
 
-    // Отправка данных
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Приведение зарплаты к числу и удаление пустых строк
         const formattedData = {
             ...data,
             salary: Number(data.salary),
@@ -107,15 +103,74 @@ const CreateVacancy = () => {
             })),
         };
 
-        console.log("Данные перед отправкой:", formattedData);
-
         dispatch(createVacancy(formattedData))
             .unwrap()
-            .then((response) => {
-                console.log("Vacancy created successfully:", response);
+            .then(() => {
+                setModal({
+                    show: true,
+                    message: "Вакансия успешно создана!",
+                    type: "success",
+                    actions: (
+                        <>
+                            <button onClick={() => navigate("/admin/all-vacancies")}>
+                                Вернуться на главный экран
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setModal({ show: false, message: "", type: "", actions: null });
+                                    setData({
+                                        salary: 0,
+                                        isActive: true,
+                                        vacancy: [
+                                            {
+                                                language_code: "en",
+                                                title: "",
+                                                requirements: [""],
+                                                responsibilities: [""],
+                                                conditions: [""],
+                                                information: [""],
+                                            },
+                                            {
+                                                language_code: "ru",
+                                                title: "",
+                                                requirements: [""],
+                                                responsibilities: [""],
+                                                conditions: [""],
+                                                information: [""],
+                                            },
+                                            {
+                                                language_code: "kgz",
+                                                title: "",
+                                                requirements: [""],
+                                                responsibilities: [""],
+                                                conditions: [""],
+                                                information: [""],
+                                            },
+                                        ],
+                                    });
+                                }}
+                            >
+                                Создать еще
+                            </button>
+                        </>
+                    ),
+                });
             })
-            .catch((error) => {
-                console.error("Failed to create vacancy:", error);
+            .catch(() => {
+                setModal({
+                    show: true,
+                    message: "Ошибка при создании вакансии!",
+                    type: "error",
+                    actions: (
+                        <button
+                            onClick={() =>
+                                setModal({ show: false, message: "", type: "", actions: null })
+                            }
+                        >
+                            Закрыть
+                        </button>
+                    ),
+                });
             });
     };
 
@@ -140,7 +195,7 @@ const CreateVacancy = () => {
                                 ? "English"
                                 : langData.language_code === "ru"
                                     ? "Русский"
-                                    : langData.language_code === "kgz" ? "Кыргызча" : null}
+                                    : "Кыргызча"}
                         </h3>
 
                         <div className={styles.cont}>
@@ -148,61 +203,65 @@ const CreateVacancy = () => {
                             <input
                                 type="text"
                                 value={langData.title}
-                                onChange={(e) =>
-                                    handleChange(e, langData.language_code, "title")
-                                }
+                                onChange={(e) => handleChange(e, langData.language_code, "title")}
                                 className={styles.input}
                             />
                         </div>
 
-                        {["requirements", "responsibilities", "conditions", "information"].map((field) => (
-                            <div key={field} className={styles.fieldGroup}>
-                                <label>
-                                    {field === "requirements"
-                                        ? "Требования"
-                                        : field === "responsibilities"
-                                            ? "Обязанности"
-                                            : field === "conditions"
-                                                ? "Условия"
-                                                : "Информация"}
-                                </label>
-                                {langData[field].map((item, index) => (
-                                    <div key={index} className={styles.fieldRow}>
-                                        <input
-                                            type="text"
-                                            value={item}
-                                            onChange={(e) =>
-                                                handleChange(e, langData.language_code, field, index)
-                                            }
-                                            className={styles.input}
-                                        />
-                                        <button
-
-                                            type="button"
-                                            onClick={() =>
-                                                handleRemoveItem(
-                                                    langData.language_code,
-                                                    field,
-                                                    index
-                                                )
-                                            }
-                                            className={styles.button_delete}
-                                        >
-                                            Удалить
-                                        </button>
-                                    </div>
-                                ))}
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        handleAddItem(langData.language_code, field)
-                                    }
-                                    className={`${styles.button} ${styles.addBtn}`}
-                                >
-                                    Добавить {field === "requirements" ? "требование" : "пункт"}
-                                </button>
-                            </div>
-                        ))}
+                        {["requirements", "responsibilities", "conditions", "information"].map(
+                            (field) => (
+                                <div key={field} className={styles.fieldGroup}>
+                                    <label>
+                                        {field === "requirements"
+                                            ? "Требования"
+                                            : field === "responsibilities"
+                                                ? "Обязанности"
+                                                : field === "conditions"
+                                                    ? "Условия"
+                                                    : "Информация"}
+                                    </label>
+                                    {langData[field].map((item, index) => (
+                                        <div key={index} className={styles.fieldRow}>
+                                            <input
+                                                type="text"
+                                                value={item}
+                                                onChange={(e) =>
+                                                    handleChange(
+                                                        e,
+                                                        langData.language_code,
+                                                        field,
+                                                        index
+                                                    )
+                                                }
+                                                className={styles.input}
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    handleRemoveItem(
+                                                        langData.language_code,
+                                                        field,
+                                                        index
+                                                    )
+                                                }
+                                                className={styles.button_delete}
+                                            >
+                                                Удалить
+                                            </button>
+                                        </div>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            handleAddItem(langData.language_code, field)
+                                        }
+                                        className={`${styles.button} ${styles.addBtn}`}
+                                    >
+                                        Добавить
+                                    </button>
+                                </div>
+                            )
+                        )}
                     </section>
                 ))}
 
@@ -212,6 +271,17 @@ const CreateVacancy = () => {
                     </button>
                 </div>
             </form>
+
+            {modal.show && (
+                <div
+                    className={`${styles.modal} ${
+                        modal.type === "success" ? styles.success : styles.error
+                    }`}
+                >
+                    <p>{modal.message}</p>
+                    <div className={styles.modalActions}>{modal.actions}</div>
+                </div>
+            )}
         </div>
     );
 };

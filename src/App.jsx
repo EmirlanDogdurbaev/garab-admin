@@ -21,6 +21,7 @@ import AllCategory from "./components/AllCategory/AllCategory.jsx";
 import EditCategory from "./components/AllCategory/EditCategory/EditCategory.jsx";
 import AllBrands from "./components/AllBrands/AllBrands.jsx";
 import EditVacancy from "./components/AllVacancy/EditVacancy/EditVacancy.jsx";
+import AllDiscounts from "./components/AllDiscounts/AllDiscounts.jsx";
 
 
 const isAuthenticated = () => {
@@ -47,7 +48,7 @@ const App = () => {
         <Layout>
             <Routes>
                 <Route path="/login" element={<Login/>}/>
-                <Route path="*" element={<ErrorPage/>}/>
+                <Route path="*" element={<Login/>}/>
                 {isAdmin && (
                     <>
                         <Route path="/admin/" element={
@@ -62,6 +63,7 @@ const App = () => {
                         <Route path="/admin/add-collection" element={<AddCollection/>}/>
                         <Route path="/admin/change-collections/:id" element={<ChangeCollection/>}/>
                         <Route path="/admin/discount" element={<ModifySpecialOffer/>}/>
+                        <Route path="/admin/all-discount" element={<AllDiscounts/>}/>
                         <Route path="/admin/add-category" element={<AddCategory/>}/>
                         <Route path="/admin/all-category" element={<AllCategory/>}/>
                         <Route path="/admin/update-category/:id" element={<EditCategory/>}/>

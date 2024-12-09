@@ -2,6 +2,7 @@ import {useState} from "react";
 import axios from "axios";
 import styles from "./FormFoAdd.module.scss";
 import {API_URI} from "../../../store/api/api.js";
+import {useNavigate} from "react-router-dom";
 
 const FormFoAdd = () => {
     const [formState, setFormState] = useState({
@@ -16,6 +17,9 @@ const FormFoAdd = () => {
             {name: "", description: "", language_code: "en"},
         ],
     });
+    const navigate = useNavigate();
+
+    const [modalVisible, setModalVisible] = useState(false);
 
     const [photos, setPhotos] = useState([]);
     const [error, setError] = useState(null);
@@ -73,45 +77,55 @@ const FormFoAdd = () => {
             })
         );
 
-        const currentPhotos = [...photos];
-
-        currentPhotos.forEach((photo, index) => {
-            if (photo.file && photo.isMain !== null && photo.hashColor !== "") {
-
-                formData.append(`photos`, photo.file);
-                formData.append(`isMain_${photo.file.name}`, photo.isMain);
-                formData.append(`hashColor_${photo.file.name}`, photo.hashColor);
-            } else {
-                console.log(`Skipping photo with index ${index} due to missing data`);
+        photos.forEach((photo, index) => {
+            if (photo.file) {
+                formData.append(`photos[${index}]`, photo.file);
+                formData.append(`photos[${index}][isMain]`, photo.isMain);
+                formData.append(`photos[${index}][hashColor]`, photo.hashColor);
             }
         });
-
-        for (const pair of formData.entries()) {
-            console.log(`${pair[0]}: ${pair[1]}`);
-        }
-
-        console.table(formData)
 
         try {
             const response = await axios.post(`${API_URI}/collection`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
-            alert("Success:", response.data);
-        } catch (error) {
-            setError(error.response?.data || error.message);
-            console.error("Error:", error);
+
+            // Успешное создание
+            setModalVisible(true);
+
+            // Сброс данных формы
+            setFormState({
+                price: 1500.75,
+                isProducer: true,
+                isPainted: false,
+                isPopular: true,
+                isNew: true,
+                collections: [
+                    { name: "", description: "", language_code: "ru" },
+                    { name: "", description: "", language_code: "kgz" },
+                    { name: "", description: "", language_code: "en" },
+                ],
+            });
+
+            setPhotos([]);
+
+            // Автоматическое закрытие модального окна и переход на главную
+            setTimeout(() => {
+                setModalVisible(false);
+                navigate("/admin/all-collections");
+            }, 3000);
+        } catch (err) {
+            console.error("Error:", err.response?.data || err.message);
+            setError(err.response?.data || "Произошла ошибка при создании коллекции.");
         }
     };
+
 
 
 
     return (
         <main className={styles.Form}>
             <form onSubmit={handleSubmit}>
-                <section className={styles.title}>
-                    <h2>Коллекции / Создать новую коллекцию</h2>
-                    <div className={styles.line}></div>
-                </section>
 
                 {formState.collections.map((collection, index) => (
                     <section key={index} className={styles.info_container}>
@@ -151,6 +165,7 @@ const FormFoAdd = () => {
                 <input
                     type="number"
                     placeholder="xxx"
+                    required
                     value={formState.price}
                     onChange={(e) =>
                         handleFormChange("price", parseFloat(e.target.value))
@@ -169,6 +184,7 @@ const FormFoAdd = () => {
                             <textarea
                                 cols="180"
                                 rows="10"
+                                required
                                 placeholder="Описание коллекции"
                                 value={collection.description}
                                 onChange={(e) =>
@@ -310,6 +326,12 @@ const FormFoAdd = () => {
 
                 {error && <p style={{color: "red"}}>{error}</p>}
             </form>
+
+            {modalVisible && (
+                <div className={styles.successModal}>
+                    <p>Коллекция успешно добавлена</p>
+                </div>
+            )}
         </main>
     );
 };

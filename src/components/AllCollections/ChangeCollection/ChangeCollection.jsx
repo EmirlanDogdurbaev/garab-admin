@@ -31,7 +31,7 @@ const ChangeCollection = () => {
         const fetchProductData = async () => {
             try {
                 const response = await axios.get(
-                    `${API_URL}/api/getCollectionById?collection_id=${id}`,
+                    `${API_URI}/getCollectionById?collection_id=${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem("token")}`,

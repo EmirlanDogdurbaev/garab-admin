@@ -56,7 +56,7 @@ const AllCollections = () => {
 
     return (
         <div className={styles.AllCollections}>
-            <h1 className={styles.titleMain}>Все Коллекции</h1>
+            <h1>Все Коллекции</h1>
             <section className={styles.search}>
 
                 <Link to={"/admin/add-collection"} className={styles.add_btn}>

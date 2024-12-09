@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchAllProducts} from "../../../store/slices/getProducts.js";
 import {fetchAllCollections} from "../../../store/slices/admin/collections/collections.js";
 import {API_URI} from "../../../store/api/api.js";
+import log from "eslint-plugin-react/lib/util/log.js";
 
 const ModifySpecialOffer = () => {
     const [startDate, setStartDate] = useState('');
@@ -26,6 +27,9 @@ const ModifySpecialOffer = () => {
         }
     }, [dispatch, selectedType]);
 
+    console.log(collections)
+    console.log(items)
+
 
 
     const options = [
@@ -44,6 +48,7 @@ const ModifySpecialOffer = () => {
         }
 
         const payload = {
+            id: selectedTargetId,
             discount_type: selectedType.value,
             target_id: selectedTargetId,
             discount_percentage: parseFloat(discount),

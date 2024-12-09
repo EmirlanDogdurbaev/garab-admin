@@ -171,6 +171,7 @@ const CreateProduct = () => {
                                 <input
                                     type="text"
                                     placeholder="Название"
+                                    required
                                     value={item.name}
                                     onChange={(e) =>
                                         handleCollectionChange(index, "name", e.target.value)
@@ -181,6 +182,8 @@ const CreateProduct = () => {
                                 <h5>Описание</h5>
                                 <textarea
                                     placeholder="Описание"
+                                    required
+
                                     value={item.description}
                                     onChange={(e) =>
                                         handleCollectionChange(index, "description", e.target.value)
