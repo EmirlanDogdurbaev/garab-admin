@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import styles from "./Login.module.scss";
 import {login} from "../../../store/slices/auth/auth.js";
 
@@ -44,7 +44,6 @@ const Login = () => {
                     <button onClick={handleLogin} disabled={loading}>
                         {loading ? "Загрузка..." : "Войти"}
                     </button>
-                    <Link to="/register">Регистрация</Link>
                 </span>
                 {error && <p>Error: {error}</p>}
             </div>

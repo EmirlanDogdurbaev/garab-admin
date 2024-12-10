@@ -81,6 +81,9 @@ const Nav = () => {
                         <li>
                             <Link to={"/admin/brands"}>Клиенты</Link>
                         </li>
+                        <li>
+                            <Link to={"/admin/all-reviews"}>Отзывы</Link>
+                        </li>
                     </ul>
                 </nav>
             ) : (
