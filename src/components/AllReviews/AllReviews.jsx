@@ -1,4 +1,4 @@
-import { FaEye, FaTrash, FaEyeSlash } from "react-icons/fa";
+import {FaEye, FaEyeSlash, FaTrash} from "react-icons/fa";
 import {useDispatch, useSelector} from "react-redux";
 import {setPage} from "../../store/slices/paginationSlice.js";
 import {useEffect, useState} from "react";
@@ -6,22 +6,23 @@ import styles from "./AllReviews.module.scss";
 import {deleteReviewById, fetchReviewsAdmin} from "../../store/slices/reviewsSlice.js";
 import {API_URI} from "../../store/api/api.js";
 import axios from "axios";
+
 const AllReviews = () => {
     const dispatch = useDispatch();
-    const { currentPage, itemsPerPage2 } = useSelector((state) => state.pagination);
-    const initialReviews = useSelector((state) => state.reviews.data); // Получение начального состояния из Redux
+    const {currentPage, itemsPerPage2} = useSelector((state) => state.pagination);
+    const initialReviews = useSelector((state) => state.reviews.data);
 
-    const [reviews, setReviews] = useState(initialReviews); // Локальное состояние для обновления видимости
+    const [reviews, setReviews] = useState(initialReviews);
     const [showModal, setShowModal] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
-    const [toast, setToast] = useState({ show: false, message: "" });
+    const [toast, setToast] = useState({show: false, message: ""});
 
     useEffect(() => {
         dispatch(fetchReviewsAdmin());
     }, [dispatch]);
 
     useEffect(() => {
-        setReviews(initialReviews); // Синхронизация локального состояния с Redux
+        setReviews(initialReviews);
     }, [initialReviews]);
 
     const startIndex = (currentPage - 1) * itemsPerPage2;
@@ -34,13 +35,28 @@ const AllReviews = () => {
         dispatch(setPage(page));
     };
 
+    const handleConfirmDelete = async () => {
+        if (deleteId) {
+            try {
+                await dispatch(deleteReviewById(deleteId)).unwrap();
+                setToast({show: true, message: "Отзыв успешно удален"});
+                setTimeout(() => setToast({show: false, message: ""}), 3000);
+                setReviews((prevReviews) => prevReviews.filter((item) => item.id !== deleteId));
+            } catch (error) {
+                console.error("Ошибка при удалении отзыва:", error);
+            }
+        }
+        setShowModal(false);
+        setDeleteId(null);
+    };
+
     const handleToggleVisibility = async (id) => {
         const token = localStorage.getItem("token");
 
         try {
             const response = await axios.post(
                 `${API_URI}/switchIsShowReview`,
-                { id },
+                {id},
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -53,12 +69,12 @@ const AllReviews = () => {
                 setReviews((prevReviews) =>
                     prevReviews.map((item) =>
                         item.id === id
-                            ? { ...item, is_show: !item.is_show } // Инвертируем значение is_show
+                            ? {...item, is_show: !item.is_show}
                             : item
                     )
                 );
-                setToast({ show: true, message: "Видимость отзыва успешно обновлена" });
-                setTimeout(() => setToast({ show: false, message: "" }), 1000);
+                setToast({show: true, message: "Видимость отзыва успешно обновлена"});
+                setTimeout(() => setToast({show: false, message: ""}), 3000);
             } else {
                 console.error("Ошибка ответа:", response.status, response.data);
             }
@@ -67,24 +83,19 @@ const AllReviews = () => {
         }
     };
 
-    const handleOpenModal = (id) => {
-        setDeleteId(id);
-        setShowModal(true);
-    };
-
     const handleCloseModal = () => {
         setShowModal(false);
         setDeleteId(null);
     };
 
     const handleCloseToast = () => {
-        setToast({ show: false, message: "" });
+        setToast({show: false, message: ""});
     };
 
     return (
         <div className={styles.AllReviews}>
             <div className={styles.inner}>
-                <h1 className={styles.titleMain} style={{ marginBottom: "20px" }}>
+                <h1 className={styles.titleMain} style={{marginBottom: "20px"}}>
                     Все Отзывы
                 </h1>
 
@@ -112,13 +123,16 @@ const AllReviews = () => {
                                             className={styles.actionButton}
                                             onClick={() => handleToggleVisibility(item.id)}
                                         >
-                                            {item.is_show ? <FaEye /> : <FaEyeSlash />}
+                                            {item.is_show ? <FaEye/> : <FaEyeSlash/>}
                                         </button>
                                         <button
                                             className={styles.actionButton}
-                                            onClick={() => handleOpenModal(item.id)}
+                                            onClick={() => {
+                                                setDeleteId(item.id);
+                                                setShowModal(true);
+                                            }}
                                         >
-                                            <FaTrash />
+                                            <FaTrash/>
                                         </button>
                                     </td>
                                 </tr>
@@ -138,7 +152,7 @@ const AllReviews = () => {
                         >
                             ←
                         </button>
-                        {Array.from({ length: totalPages }, (_, index) => (
+                        {Array.from({length: totalPages}, (_, index) => (
                             <button
                                 key={index + 1}
                                 onClick={() => handlePageChange(index + 1)}
@@ -156,7 +170,7 @@ const AllReviews = () => {
                     </div>
                 )}
             </div>
-            {/* Модальное окно */}
+
             {showModal && (
                 <div className={`${styles.modal} ${styles.show}`}>
                     <div className={styles.modalContent}>
@@ -172,7 +186,7 @@ const AllReviews = () => {
                     </div>
                 </div>
             )}
-            {/* Тост уведомление */}
+
             {toast.show && (
                 <div className={`${styles.toast}`}>
                     <p>{toast.message}</p>
