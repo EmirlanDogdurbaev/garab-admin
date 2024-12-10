@@ -78,7 +78,7 @@ export const updateVacancy = createAsyncThunk(
                 data,
                 {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`, // Замените на реальный токен
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                         "Content-Type": "application/json",
                     },
                 }

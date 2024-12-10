@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { deleteVacancyById, fetchVacancies } from "../../store/slices/getVacancy.js";
 import styles from "./AllVacancy.module.scss";
+import {toggle} from "../../store/slices/reviewsSlice.js";
 
 const AllVacancy = () => {
     const dispatch = useDispatch();
@@ -13,11 +14,14 @@ const AllVacancy = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
+
     const [toast, setToast] = useState({ show: false, message: "" });
 
     useEffect(() => {
         dispatch(fetchVacancies());
     }, [dispatch]);
+
+
 
     const startIndex = (currentPage - 1) * itemsPerPage2;
     const endIndex = startIndex + itemsPerPage2;
@@ -49,6 +53,7 @@ const AllVacancy = () => {
         setShowModal(false);
         setDeleteId(null);
     };
+
 
     const handleCloseModal = () => {
         setShowModal(false);

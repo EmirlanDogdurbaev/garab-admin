@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https:/garant-asia/api",
+    baseURL: "https:/garant-asia.com/api",
 
 });
 
