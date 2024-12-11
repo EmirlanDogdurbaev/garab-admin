@@ -79,21 +79,27 @@ const FormFoAdd = () => {
 
         photos.forEach((photo, index) => {
             if (photo.file) {
-                formData.append(`photos[${index}]`, photo.file);
+                formData.append(`photos`, photo.file);
                 formData.append(`photos[${index}][isMain]`, photo.isMain);
                 formData.append(`photos[${index}][hashColor]`, photo.hashColor);
             }
         });
+
+        // Логируем данные FormData перед отправкой
+        console.log("Данные, отправляемые на бэкэнд:");
+        for (const pair of formData.entries()) {
+            console.log(`${pair[0]}:`, pair[1]);
+        }
 
         try {
             const response = await axios.post(`${API_URI}/collection`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
-            // Успешное создание
+            console.log("Ответ от сервера:", response.data);
             setModalVisible(true);
 
-            // Сброс данных формы
+            // Сбрасываем форму
             setFormState({
                 price: 1500.75,
                 isProducer: true,
@@ -109,13 +115,12 @@ const FormFoAdd = () => {
 
             setPhotos([]);
 
-            // Автоматическое закрытие модального окна и переход на главную
             setTimeout(() => {
                 setModalVisible(false);
                 navigate("/admin/all-collections");
             }, 3000);
         } catch (err) {
-            console.error("Error:", err.response?.data || err.message);
+            console.error("Ошибка при отправке данных:", err.response?.data || err.message);
             setError(err.response?.data || "Произошла ошибка при создании коллекции.");
         }
     };
