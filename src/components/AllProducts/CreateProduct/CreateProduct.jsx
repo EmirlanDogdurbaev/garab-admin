@@ -1,12 +1,13 @@
 import styles from "./CreateProduct.module.scss";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import { API_URI } from "../../../store/api/api.js";
+import {API_URI} from "../../../store/api/api.js";
 import Select from "react-select";
 import {customStyles} from "../../AllDiscounts/ModifySpecialOffer/ModifySpecialOffer.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAllCollections} from "../../../store/slices/admin/collections/collections.js";
 import {fetchCategories} from "../../../store/slices/getCategories.js";
+import {useNavigate} from "react-router-dom";
 
 const CreateProduct = () => {
     const dispatch = useDispatch();
@@ -14,9 +15,11 @@ const CreateProduct = () => {
     const collectionsList = useSelector((state) => state.collections.data);
     const [photos, setPhotos] = useState([]);
     const [error, setError] = useState(null);
+    const [successMessage, setSuccessMessage] = useState("");
+    const navigate = useNavigate();
 
     const [formState, setFormState] = useState({
-        price: 1500.75,
+        price: "",
         isProducer: true,
         isPainted: false,
         isPopular: true,
@@ -24,12 +27,11 @@ const CreateProduct = () => {
         category_id: null,
         collection_id: null,
         items: [
-            { name: "", description: "", language_code: "ru" },
-            { name: "", description: "", language_code: "kgz" },
-            { name: "", description: "", language_code: "en" },
+            {name: "", description: "", language_code: "ru"},
+            {name: "", description: "", language_code: "kgz"},
+            {name: "", description: "", language_code: "en"},
         ],
     });
-
 
     useEffect(() => {
         dispatch(fetchAllCollections());
@@ -42,6 +44,7 @@ const CreateProduct = () => {
             [field]: value,
         }));
     };
+
     const handleCollectionChange = (index, field, value) => {
         const updatedItems = [...formState.items];
         updatedItems[index][field] = value;
@@ -74,7 +77,6 @@ const CreateProduct = () => {
         setPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== index));
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -91,24 +93,42 @@ const CreateProduct = () => {
                 items: formState.items,
                 collection_id: formState.collection_id,
                 category_id: formState.category_id,
-                size:"M"
+                size: "M",
             })
         );
 
-        photos.forEach((photo, index) => {
+        photos.forEach((photo) => {
             if (photo.file) {
                 formData.append(`photos`, photo.file);
-                formData.append(`photos[${index}][isMain]`, photo.isMain);
-                formData.append(`photos[${index}][hashColor]`, photo.hashColor);
+                formData.append(`isMain_${photo.file.name}`, photo.isMain);
+                formData.append(`hashColor_${photo.file.name}`, photo.hashColor);
             }
         });
 
-        console.log(formData)
         try {
             const response = await axios.post(`${API_URI}/items`, formData, {
-                headers: { "Content-Type": "multipart/form-data" },
+                headers: {"Content-Type": "multipart/form-data"},
             });
-            alert("Success:", response.data);
+            setSuccessMessage("Продукт успешно добавлен!");
+
+            setFormState({
+                price: "",
+                isProducer: true,
+                isPainted: false,
+                isPopular: true,
+                isNew: true,
+                category_id: null,
+                collection_id: null,
+                items: [
+                    {name: "", description: "", language_code: "ru"},
+                    {name: "", description: "", language_code: "kgz"},
+                    {name: "", description: "", language_code: "en"},
+                ],
+            });
+            setPhotos([]);
+
+            setTimeout(() => setSuccessMessage(""), 3000);
+            navigate("/admin/all-products");
         } catch (err) {
             setError(err.response?.data || "Ошибка при создании товара.");
             console.error("Ошибка:", err);
@@ -122,6 +142,12 @@ const CreateProduct = () => {
                     <h2>Коллекции / добавить товар</h2>
                     <div className={styles.line}></div>
                 </section>
+
+                {successMessage && (
+                    <div className={styles.successMessage}>
+                        <p>{successMessage}</p>
+                    </div>
+                )}
 
                 <form onSubmit={handleSubmit}>
                     <div className={styles.select_section}>
@@ -140,7 +166,6 @@ const CreateProduct = () => {
                         />
                     </div>
 
-                    {/* Select for collections */}
                     <div className={styles.select_section}>
                         <h3>Выберите коллекцию</h3>
                         <Select
@@ -156,6 +181,7 @@ const CreateProduct = () => {
                             }
                         />
                     </div>
+
 
                     {formState.items.map((item, index) => (
                         <section key={index} className={styles.info_container}>
@@ -178,12 +204,24 @@ const CreateProduct = () => {
                                     }
                                 />
                             </label>
+                            <label className={styles.priceLabel}>
+                                <h5>Цена</h5>
+                                <input
+                                    type="number"
+                                    placeholder="Введите цену"
+                                    required
+                                    value={formState.price}
+                                    onChange={(e) =>
+                                        handleFormChange("price", parseFloat(e.target.value))
+                                    }
+                                />
+                            </label>
+
                             <label>
                                 <h5>Описание</h5>
                                 <textarea
                                     placeholder="Описание"
                                     required
-
                                     value={item.description}
                                     onChange={(e) =>
                                         handleCollectionChange(index, "description", e.target.value)
@@ -229,7 +267,6 @@ const CreateProduct = () => {
                                             <input
                                                 style={{height: "300px", width: "300px"}}
                                                 type="file"
-
                                                 onChange={(e) => handleFileChange(index, e.target.files[0])}
                                             />
                                         )}
@@ -268,7 +305,6 @@ const CreateProduct = () => {
                         </div>
                     </div>
 
-
                     <button type="submit" className={styles.saveButton}>
                         Сохранить
                     </button>
@@ -280,6 +316,3 @@ const CreateProduct = () => {
 };
 
 export default CreateProduct;
-
-
-

@@ -90,6 +90,14 @@ const ChangeCollection = () => {
         }));
     };
 
+    const handleFileReplace = (index) => {
+        const updatedPhotos = [...photos];
+        updatedPhotos[index].file = null; // Удаляем текущий файл
+        updatedPhotos[index].url = null; // Удаляем серверное фото
+        setPhotos(updatedPhotos); // Обновляем состояние
+    };
+
+
     const handleAddPhoto = () => {
         setPhotos((prevPhotos) => [
             ...prevPhotos,
@@ -100,7 +108,7 @@ const ChangeCollection = () => {
     const handleFileChange = (index, file) => {
         const updatedPhotos = [...photos];
         updatedPhotos[index].file = file;
-        updatedPhotos[index].url = null; // Сбрасываем URL, так как файл заменён
+        updatedPhotos[index].url = null;
         setPhotos(updatedPhotos);
     };
 
@@ -132,30 +140,29 @@ const ChangeCollection = () => {
             })
         );
 
-        photos.forEach((photo, index) => {
-            if (photo.file) {
-                formData.append(`photos[${index}][file]`, photo.file);
-            }
-            if (photo.url) {
-                formData.append(`photos[${index}][url]`, photo.url);
-            }
-            formData.append(`photos[${index}][isMain]`, photo.isMain);
-            formData.append(`photos[${index}][hashColor]`, photo.hashColor);
+        photos.forEach((photo) => {
+            console.log(photo)
+            formData.append(`photos`, photo.file);
+            formData.append(`isMain_${photo.file.name}`, photo.isMain);
+            formData.append(`hashColor_${photo.file.name}`, photo.hashColor);
         });
 
         try {
-            await axios.put(`${API_URI}/collection?collection_id=${id}`, formData, {
+            const response = await axios.put(`${API_URI}/collection?collection_id=${id}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
+            console.log(response.data);
             setModal({show: true, message: "Товар успешно обновлён", type: "success"});
         } catch (err) {
             setError(err.response?.data || "Ошибка при обновлении коллекции.");
             console.error("Ошибка:", err);
         }
     };
+
+
 
     if (loading) return <p>Загрузка...</p>;
 

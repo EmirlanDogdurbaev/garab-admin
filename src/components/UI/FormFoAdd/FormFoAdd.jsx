@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 
 const FormFoAdd = () => {
     const [formState, setFormState] = useState({
-        price: 1500.75,
+
         isProducer: true,
         isPainted: false,
         isPopular: true,
@@ -68,7 +68,7 @@ const FormFoAdd = () => {
         formData.append(
             "collection",
             JSON.stringify({
-                price: formState.price,
+
                 isProducer: formState.isProducer,
                 isPainted: formState.isPainted,
                 isPopular: formState.isPopular,
@@ -77,11 +77,11 @@ const FormFoAdd = () => {
             })
         );
 
-        photos.forEach((photo, index) => {
+        photos.forEach((photo) => {
             if (photo.file) {
                 formData.append(`photos`, photo.file);
-                formData.append(`photos[${index}][isMain]`, photo.isMain);
-                formData.append(`photos[${index}][hashColor]`, photo.hashColor);
+                formData.append(`isMain_${photo.file.name}`, photo.isMain);
+                formData.append(`hashColor_${photo.file.name}`, photo.hashColor);
             }
         });
 
@@ -93,7 +93,7 @@ const FormFoAdd = () => {
 
         try {
             const response = await axios.post(`${API_URI}/collection`, formData, {
-                headers: { "Content-Type": "multipart/form-data" },
+                headers: {"Content-Type": "multipart/form-data"},
             });
 
             console.log("Ответ от сервера:", response.data);
@@ -101,15 +101,15 @@ const FormFoAdd = () => {
 
             // Сбрасываем форму
             setFormState({
-                price: 1500.75,
+                price: 0,
                 isProducer: true,
                 isPainted: false,
                 isPopular: true,
                 isNew: true,
                 collections: [
-                    { name: "", description: "", language_code: "ru" },
-                    { name: "", description: "", language_code: "kgz" },
-                    { name: "", description: "", language_code: "en" },
+                    {name: "", description: "", language_code: "ru"},
+                    {name: "", description: "", language_code: "kgz"},
+                    {name: "", description: "", language_code: "en"},
                 ],
             });
 
@@ -124,8 +124,6 @@ const FormFoAdd = () => {
             setError(err.response?.data || "Произошла ошибка при создании коллекции.");
         }
     };
-
-
 
 
     return (
@@ -159,24 +157,7 @@ const FormFoAdd = () => {
                     }
                 />
               </label>
-              <label>
-                <h5>
-                  {collection.language_code === "ru"
-                      ? "Цена"
-                      : collection.language_code === "kgz"
-                          ? "Баасы"
-                          : "Price"}
-                </h5>
-                <input
-                    type="number"
-                    placeholder="xxx"
-                    required
-                    value={formState.price}
-                    onChange={(e) =>
-                        handleFormChange("price", parseFloat(e.target.value))
-                    }
-                />
-              </label>
+
             </span>
                         <label htmlFor="" className={styles.textarea}>
                             <h5>
@@ -277,7 +258,7 @@ const FormFoAdd = () => {
                     <div className={styles.grid}>
                         {photos.map((photo, index) => (
                             <div key={index} className={styles.cardWrapper}>
-                                <div className={styles.card} style={{height:"300px" , width:"300px"}}>
+                                <div className={styles.card} style={{height: "300px", width: "300px"}}>
                                     {photo.file ? (
                                         <img
                                             src={URL.createObjectURL(photo.file)}
@@ -285,7 +266,7 @@ const FormFoAdd = () => {
                                         />
                                     ) : (
                                         <input
-                                            style={{height:"300px" , width:"300px"}}
+                                            style={{height: "300px", width: "300px"}}
                                             type="file"
                                             onChange={(e) => handleFileChange(index, e.target.files[0])}
                                         />
@@ -319,7 +300,7 @@ const FormFoAdd = () => {
                                 </div>
                             </div>
                         ))}
-                        <button type="button" onClick={handleAddPhoto}   style={{height:"300px" , width:"300px"}}>
+                        <button type="button" onClick={handleAddPhoto} style={{height: "300px", width: "300px"}}>
                             Добавить фото
                         </button>
                     </div>

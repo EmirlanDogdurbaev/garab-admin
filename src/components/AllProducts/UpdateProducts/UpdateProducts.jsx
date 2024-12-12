@@ -75,7 +75,7 @@ const UpdateProducts = () => {
                             hashColor: photo.hashColor,
                             url: photo.url,
                         }))
-                        : [] // Если photos нет, устанавливаем пустой массив
+                        : []
                 );
 
                 setLoading(false);
@@ -115,15 +115,17 @@ const UpdateProducts = () => {
 
     const handleFileReplace = (index) => {
         const updatedPhotos = [...photos];
-        updatedPhotos[index].file = null; // Удаляем текущий файл
-        updatedPhotos[index].url = null; // Удаляем серверное фото
-        setPhotos(updatedPhotos); // Обновляем состояние
+        updatedPhotos[index].file = null;
+        updatedPhotos[index].url = null;
+        setPhotos(updatedPhotos);
     };
+
+
 
     const handleFileChange = (index, file) => {
         const updatedPhotos = [...photos];
-        updatedPhotos[index].file = file; // Устанавливаем новый файл
-        setPhotos(updatedPhotos); // Обновляем состояние
+        updatedPhotos[index].file = file;
+        setPhotos(updatedPhotos);
     };
 
     const handlePhotoFieldChange = (index, field, value) => {
@@ -156,11 +158,12 @@ const UpdateProducts = () => {
             })
         );
 
-        photos.forEach((photo, index) => {
+        photos.forEach((photo) => {
+            console.log(photo)
             if (photo.file) {
                 formData.append(`photos`, photo.file);
-                formData.append(`photos[${index}][isMain]`, photo.isMain);
-                formData.append(`photos[${index}][hashColor]`, photo.hashColor);
+                formData.append(`isMain_${photo.file.name}`, photo.isMain);
+                formData.append(`hashColor_${photo.file.name}`, photo.hashColor);
             }
         });
 
@@ -185,8 +188,6 @@ const UpdateProducts = () => {
         setModal({show: false, message: "", type: ""});
     };
     if (loading) return <p>Загрузка...</p>;
-
-
 
 
 
@@ -253,6 +254,18 @@ const UpdateProducts = () => {
                                     value={item.name}
                                     onChange={(e) =>
                                         handleCollectionChange(index, "name", e.target.value)
+                                    }
+                                />
+                            </label>
+                            <label className={styles.priceLabel}>
+                                <h5>Цена</h5>
+                                <input
+                                    type="number"
+                                    placeholder="Введите цену"
+                                    required
+                                    value={formState.price}
+                                    onChange={(e) =>
+                                        handleFormChange("price", parseFloat(e.target.value))
                                     }
                                 />
                             </label>
@@ -349,8 +362,6 @@ const UpdateProducts = () => {
                             ))}
 
 
-
-
                             <button type="button" onClick={handleAddPhoto} style={{height: "300px", width: "300px"}}>
                                 Добавить фото
                             </button>
@@ -361,7 +372,7 @@ const UpdateProducts = () => {
                     <button type="submit" className={styles.saveButton}>
                         Сохранить
                     </button>
-                    {error && <p style={{color: "red"}}>{error}</p>}
+                    {error && <p style={{ color: "red" }}>{typeof error === "string" ? error : JSON.stringify(error)}</p>}
                 </form>
             </div>
             {modal.show && (
