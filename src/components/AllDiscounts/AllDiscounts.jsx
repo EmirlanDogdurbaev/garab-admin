@@ -4,12 +4,14 @@ import {deleteProductById, fetchAllProducts, fetchDiscountProducts} from "../../
 import {setPage} from "../../store/slices/paginationSlice.js";
 import styles from "../AllProducts/AllProducts.module.scss";
 import {Link} from "react-router-dom";
-import {FaEdit, FaTrash} from "react-icons/fa";
+import { FaTrash} from "react-icons/fa";
 
 const AllDiscounts = () => {
     const dispatch = useDispatch();
     const {currentPage, itemsPerPage2} = useSelector((state) => state.pagination);
     const items = useSelector((state) => state.products.discount);
+
+    console.log(items);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState(null);

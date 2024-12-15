@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const AddCategory = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { status, error } = useSelector((state) => state.categories);
+    const { status } = useSelector((state) => state.categories);
 
     const [data, setData] = useState({
         ru: "",
@@ -18,7 +18,7 @@ const AddCategory = () => {
     const [modal, setModal] = useState({
         show: false,
         message: "",
-        type: "", // success or error
+        type: "",
     });
 
     const handleInputChange = (event, language) => {
@@ -45,7 +45,8 @@ const AddCategory = () => {
         try {
             await dispatch(createCategory(category_list)).unwrap();
             setModal({ show: true, message: "Категория успешно создана!", type: "success" });
-        } catch (err) {
+        } catch (error) {
+            console.log(error)
             setModal({ show: true, message: "Ошибка при создании категории. Попробуйте снова.", type: "error" });
         }
     };
@@ -54,7 +55,6 @@ const AddCategory = () => {
         setModal({ show: false, message: "", type: "" });
 
         if (modal.type === "success") {
-            // Перенаправление на список категорий
             navigate("/admin/all-category");
         }
     };

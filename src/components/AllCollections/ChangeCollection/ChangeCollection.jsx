@@ -2,13 +2,14 @@ import styles from "./ChangeCollection.module.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URI } from "../../../store/api/api.js";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 const API_URL = "http://localhost:8080";
 
 const ChangeCollection = () => {
     const { id } = useParams();
     const [photos, setPhotos] = useState([]);
+    const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [modal, setModal] = useState({show: false, message: "", type: ""}); // Для модального окна
@@ -154,8 +155,8 @@ const ChangeCollection = () => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
-            console.log(response.data);
             setModal({show: true, message: "Товар успешно обновлён", type: "success"});
+            navigate("/admin/all-collections");
         } catch (err) {
             setError(err.response?.data || "Ошибка при обновлении коллекции.");
             console.error("Ошибка:", err);

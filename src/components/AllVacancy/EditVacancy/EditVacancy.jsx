@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {fetchVacancyById, updateVacancy} from "../../../store/slices/getVacancy.js";
 import {useDispatch} from "react-redux";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import styles from "./EditVacancy.module.scss";
 const EditVacancy = () => {
 
@@ -11,6 +11,7 @@ const EditVacancy = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const navigate = useNavigate();
     useEffect(() => {
         if (id) {
             dispatch(fetchVacancyById(id))
@@ -100,7 +101,7 @@ const EditVacancy = () => {
             .unwrap()
             .then(() => {
                 alert("Vacancy updated successfully!");
-
+                navigate("/admin/all-vacancies");
             })
             .catch((error) => {
                 console.error("Ошибка при обновлении вакансии:", error);

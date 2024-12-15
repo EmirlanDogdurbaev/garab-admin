@@ -1,9 +1,7 @@
-import './App.css';
-import {Navigate, Route, Routes} from 'react-router-dom';
-import ErrorPage from './Pages/Errorpage/Errorpage';
+import "./App.css";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout.jsx";
-import './i18n';
-import AdminPage from "./Pages/AdminPage/AdminPage.jsx";
+import "./i18n";
 import AllProducts from "./components/AllProducts/AllProducts.jsx";
 import ModifySpecialOffer from "./components/AllDiscounts/ModifySpecialOffer/ModifySpecialOffer.jsx";
 import ChangeCollection from "./components/AllCollections/ChangeCollection/ChangeCollection.jsx";
@@ -24,61 +22,70 @@ import EditVacancy from "./components/AllVacancy/EditVacancy/EditVacancy.jsx";
 import AllDiscounts from "./components/AllDiscounts/AllDiscounts.jsx";
 import AllReviews from "./components/AllReviews/AllReviews.jsx";
 
-
 const isAuthenticated = () => {
     const token = localStorage.getItem("token");
     if (!token) return false;
 
     try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
+        const payload = JSON.parse(atob(token.split(".")[1]));
         return payload.exp > Date.now() / 1000;
     } catch {
         return false;
     }
 };
 
-// eslint-disable-next-line react/prop-types
-const ProtectedRoute = ({isAuthenticated, children}) => {
-    return isAuthenticated ? children : <Navigate to="/"/>;
+const ProtectedRoute = ({ children }) => {
+    const auth = isAuthenticated();
+    return auth ? children : <Navigate to="/login" />;
 };
 
 const App = () => {
-    const isAdmin = isAuthenticated();
-
     return (
-        <Layout>
-            <Routes>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="*" element={<Login/>}/>
-                {isAdmin && (
-                    <>
-                        <Route path="/admin/" element={
-                            <ProtectedRoute isAuthenticated={isAdmin}>
-                                <AdminPage/>
-                            </ProtectedRoute>
-                        }/>
-                        <Route path="/admin/all-products" element={<AllProducts/>}/>
-                        <Route path="/admin/add-product" element={<CreateProduct/>}/>
-                        <Route path="/admin/update-product/:id" element={<UpdateProducts/>}/>
-                        <Route path="/admin/all-collections" element={<AllCollections/>}/>
-                        <Route path="/admin/add-collection" element={<AddCollection/>}/>
-                        <Route path="/admin/change-collections/:id" element={<ChangeCollection/>}/>
-                        <Route path="/admin/discount" element={<ModifySpecialOffer/>}/>
-                        <Route path="/admin/all-discount" element={<AllDiscounts/>}/>
-                        <Route path="/admin/add-category" element={<AddCategory/>}/>
-                        <Route path="/admin/all-category" element={<AllCategory/>}/>
-                        <Route path="/admin/update-category/:id" element={<EditCategory/>}/>
-                        <Route path="/admin/all-vacancies" element={<AllVacancy/>}/>
-                        <Route path="/admin/change-vacancy/:id" element={<EditVacancy/>}/>
-                        <Route path="/admin/create-vacancy" element={<CreateVacancy/>}/>
-                        <Route path="/admin/create-brand" element={<CreateBrand/>}/>
-                        <Route path="/admin/update-brand/:id" element={<UpdateBrand/>}/>
-                        <Route path="/admin/brands" element={<AllBrands/>}/>
-                        <Route path="/admin/all-reviews" element={<AllReviews/>}/>
-                    </>
-                )}
-            </Routes>
-        </Layout>
+        <Routes>
+            <Route
+                path="/login"
+                element={
+                    isAuthenticated() ? (
+                        <Navigate to="/admin" />
+                    ) : (
+                        <Login />
+                    )
+                }
+            />
+
+            <Route
+                path="/admin/*"
+                element={
+                    <ProtectedRoute>
+                        <Layout>
+                            <Routes>
+                                <Route path="/all-products" element={<AllProducts />} />
+                                <Route path="/add-product" element={<CreateProduct />} />
+                                <Route path="/update-product/:id" element={<UpdateProducts />} />
+                                <Route path="/all-collections" element={<AllCollections />} />
+                                <Route path="/add-collection" element={<AddCollection />} />
+                                <Route path="/change-collections/:id" element={<ChangeCollection />} />
+                                <Route path="/discount" element={<ModifySpecialOffer />} />
+                                <Route path="/all-discount" element={<AllDiscounts />} />
+                                <Route path="/add-category" element={<AddCategory />} />
+                                <Route path="/all-category" element={<AllCategory />} />
+                                <Route path="/update-category/:id" element={<EditCategory />} />
+                                <Route path="/all-vacancies" element={<AllVacancy />} />
+                                <Route path="/change-vacancy/:id" element={<EditVacancy />} />
+                                <Route path="/create-vacancy" element={<CreateVacancy />} />
+                                <Route path="/create-brand" element={<CreateBrand />} />
+                                <Route path="/update-brand/:id" element={<UpdateBrand />} />
+                                <Route path="/brands" element={<AllBrands />} />
+                                <Route path="/all-reviews" element={<AllReviews />} />
+                                <Route path="*" element={<AllProducts />} />
+                            </Routes>
+                        </Layout>
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
     );
 };
 

@@ -3,10 +3,9 @@ import {useEffect, useState} from "react";
 import Select from "react-select";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchAllProducts} from "../../../store/slices/getProducts.js";
-import {fetchAllCollections} from "../../../store/slices/admin/collections/collections.js";
+import {fetchWithoutDiscountProducts} from "../../../store/slices/getProducts.js";
+import {fetchWithoutDiscountCollections} from "../../../store/slices/admin/collections/collections.js";
 import {API_URI} from "../../../store/api/api.js";
-import log from "eslint-plugin-react/lib/util/log.js";
 
 const ModifySpecialOffer = () => {
     const [startDate, setStartDate] = useState('');
@@ -21,14 +20,11 @@ const ModifySpecialOffer = () => {
 
     useEffect(() => {
         if (selectedType?.value === "item") {
-            dispatch(fetchAllProducts());
+            dispatch(fetchWithoutDiscountProducts());
         } else if (selectedType?.value === "collection") {
-            dispatch(fetchAllCollections());
+            dispatch(fetchWithoutDiscountCollections());
         }
     }, [dispatch, selectedType]);
-
-    console.log(collections)
-    console.log(items)
 
 
 
@@ -39,7 +35,10 @@ const ModifySpecialOffer = () => {
 
     const handleRadioChange = (id) => {
         setSelectedTargetId(id);
+
+
     };
+    console.log(selectedType, startDate, endDate, selectedTargetId)
 
     const handleSave = async () => {
         if (!selectedType || !startDate || !endDate || !selectedTargetId) {
@@ -65,7 +64,6 @@ const ModifySpecialOffer = () => {
                     "Content-Type": "application/json",
                 },
             });
-
             console.log(response.data);
             alert("Спецпредложение успешно сохранено!");
             console.log("Response:", response.data);
@@ -109,17 +107,17 @@ const ModifySpecialOffer = () => {
                     ) : selectedType?.value === "item" ? (
                         items.map((item) => (
                             <tr key={item.id}>
-                                <td >{item.name} <input
+                                <td>{item.name} <input
                                     type="radio"
                                     name="item"
-                                    onChange={() => handleRadioChange(item.ID)}
+                                    onChange={() => handleRadioChange(item.id)}
                                 /></td>
 
                             </tr>
                         ))
                     ) : (
                         <tr>
-                        <td colSpan="2">Выберите тип продукта для отображения списка</td>
+                            <td colSpan="2">Выберите тип продукта для отображения списка</td>
                         </tr>
                     )}
                     </tbody>

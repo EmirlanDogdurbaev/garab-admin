@@ -15,6 +15,18 @@ export const fetchAllCollections = createAsyncThunk(
     }
 )
 
+export const fetchWithoutDiscountCollections = createAsyncThunk(
+    'admin/collections/fetchWithoutDiscountCollections',
+    async (_, {rejectWithValue}) => {
+        try {
+            const response = await axios.get(`${API_URI}/getCollectionWithoutDiscount`);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || error.message);
+        }
+    }
+)
+
 
 export const deleteCollectionById = createAsyncThunk(
     'admin/collections/deleteCollectionById',
@@ -88,6 +100,18 @@ const collectionsSlice = createSlice({
                 state.data = action.payload;
             })
             .addCase(fetchAllCollections.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || action.error.message;
+            })
+            .addCase(fetchWithoutDiscountCollections.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchWithoutDiscountCollections.fulfilled, (state, action) => {
+                state.loading = false;
+                state.data = action.payload;
+            })
+            .addCase(fetchWithoutDiscountCollections.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload || action.error.message;
             })

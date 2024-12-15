@@ -2,13 +2,14 @@ import styles from "./EditCategory.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCategoriesById, updateCategory} from "../../../store/slices/getCategories.js";
 import {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 
 const EditCategory = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const { status, error} = useSelector((state) => state.categories);
     const category = useSelector((state)=> state.categories.categories)
+    const navigate = useNavigate();
 
     const [data, setData] = useState({
         ru: "",
@@ -57,10 +58,14 @@ const EditCategory = () => {
             .unwrap()
             .then(() => {
                 alert("Категория успешно обновлена!");
+                navigate("/admin/all-category");
             })
             .catch((err) => {
                 alert(`Ошибка обновления категории: ${err}`);
             });
+
+
+
     };
 
     return (

@@ -92,6 +92,7 @@ export const fetchByProducer = createAsyncThunk(
         return [...response.data.items, ...response.data.collections];
     }
 )
+
 export const fetchAllProducts = createAsyncThunk(
     'products/fetchAllProducts',
     async (_, {rejectWithValue}) => {
@@ -157,6 +158,21 @@ export const fetchDiscountProducts = createAsyncThunk(
         }
     }
 )
+
+export const fetchWithoutDiscountProducts = createAsyncThunk(
+    'products/fetchWithoutDiscountProducts',
+    async (_, {rejectWithValue, getState}) => {
+        try {
+            const response = await axios.get(`${API_URI}/getItemWithoutDiscount`);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || 'Failed to fetch data');
+        }
+    }
+)
+
+
+
 
 
 export const deleteProductById = createAsyncThunk(
@@ -380,7 +396,18 @@ const productsSlice = createSlice({
                 state.error = action.error.message;
             })
 
-
+            .addCase(fetchWithoutDiscountProducts.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchWithoutDiscountProducts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.data = action.payload;
+            })
+            .addCase(fetchWithoutDiscountProducts.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
 
 
 

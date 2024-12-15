@@ -283,24 +283,51 @@ const UpdateProducts = () => {
                     ))}
 
                     <div className={styles.filters}>
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={formState.isPopular}
-                                onChange={() =>
-                                    handleFormChange("isPopular", !formState.isPopular)
-                                }
-                            />
-                            Популярный товар
-                        </label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={formState.isNew}
-                                onChange={() => handleFormChange("isNew", !formState.isNew)}
-                            />
-                            Новый товар (новинка)
-                        </label>
+                        <div className={styles.group}>
+                            <h5>Производство</h5>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="isProducer"
+                                    value={true}
+                                    checked={formState.isProducer === true}
+                                    onChange={() => handleFormChange("isProducer", true)}
+                                />
+                                Производитель
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="isProducer"
+                                    value={false}
+                                    checked={formState.isProducer === false}
+                                    onChange={() => handleFormChange("isProducer", false)}
+                                />
+                                Дистрибьютор
+                            </label>
+                        </div>
+
+                        <div className={styles.group}>
+                            <h5>Дополнительно</h5>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={formState.isPopular}
+                                    onChange={() =>
+                                        handleFormChange("isPopular", !formState.isPopular)
+                                    }
+                                />
+                                Популярный товар
+                            </label>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={formState.isNew}
+                                    onChange={() => handleFormChange("isNew", !formState.isNew)}
+                                />
+                                Новый товар (новинка)
+                            </label>
+                        </div>
                     </div>
 
                     <div className={styles.photos}>
@@ -309,7 +336,7 @@ const UpdateProducts = () => {
 
                             {Array.isArray(photos) && photos.map((photo, index) => (
                                 <div key={index} className={styles.cardWrapper}>
-                                    <div className={styles.card} style={{ height: "300px", width: "300px" }}>
+                                    <div className={styles.card} style={{height: "300px", width: "300px"}}>
                                         {photo.file ? (
                                             <img
                                                 src={URL.createObjectURL(photo.file)}
@@ -322,7 +349,7 @@ const UpdateProducts = () => {
                                             />
                                         ) : (
                                             <input
-                                                style={{ height: "300px", width: "300px" }}
+                                                style={{height: "300px", width: "300px"}}
                                                 type="file"
                                                 onChange={(e) => handleFileChange(index, e.target.files[0])}
                                             />
@@ -372,7 +399,7 @@ const UpdateProducts = () => {
                     <button type="submit" className={styles.saveButton}>
                         Сохранить
                     </button>
-                    {error && <p style={{ color: "red" }}>{typeof error === "string" ? error : JSON.stringify(error)}</p>}
+                    {error && <p style={{color: "red"}}>{typeof error === "string" ? error : JSON.stringify(error)}</p>}
                 </form>
             </div>
             {modal.show && (

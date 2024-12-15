@@ -1,25 +1,26 @@
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {fetchBrandsById, updateBrand} from "../../../store/slices/admin/brands/brands.js";
 import styles from "./UpdateBrands.module.scss";
 
 const UpdateBrand = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
-    const {loading, error, brand} = useSelector((state) => state.brands);
+    const {loading, error} = useSelector((state) => state.brands);
+    const navigate = useNavigate();
 
-    const [name, setName] = useState(""); // Состояние для имени бренда
-    const [photo, setPhoto] = useState(null); // Состояние для нового фото
-    const [preview, setPreview] = useState(null); // Превью (локально загруженного или существующего фото)
+    const [name, setName] = useState("");
+    const [photo, setPhoto] = useState(null);
+    const [preview, setPreview] = useState(null);
 
     useEffect(() => {
         if (id) {
             dispatch(fetchBrandsById(id))
                 .unwrap()
                 .then((fetchedBrand) => {
-                    setName(fetchedBrand.name || ""); // Заполняем имя из API
-                    setPreview(fetchedBrand.photo || null); // Если фото уже есть, заполняем его
+                    setName(fetchedBrand.name || "");
+                    setPreview(fetchedBrand.photo || null);
                 })
                 .catch((err) => console.error("Ошибка загрузки бренда:", err));
         }
@@ -28,14 +29,14 @@ const UpdateBrand = () => {
     const handlePhotoChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setPhoto(file); // Устанавливаем новое фото
-            setPreview(URL.createObjectURL(file)); // Показываем превью для нового фото
+            setPhoto(file);
+            setPreview(URL.createObjectURL(file));
         }
     };
 
     const handleRemovePhoto = () => {
-        setPhoto(null); // Удаляем локально загруженное фото
-        setPreview(null); // Сбрасываем превью
+        setPhoto(null);
+        setPreview(null);
     };
 
     const handleSubmit = (e) => {
@@ -47,16 +48,17 @@ const UpdateBrand = () => {
         }
 
         const formData = new FormData();
-        formData.append("name", name.trim()); // Убедимся, что имя очищено от лишних пробелов
+        formData.append("name", name.trim());
 
         if (photo) {
-            formData.append("photo", photo); // Добавляем новое фото, если оно загружено
+            formData.append("photo", photo);
         }
 
         dispatch(updateBrand({brandId: id, formData}))
             .unwrap()
             .then(() => {
                 alert("Бренд успешно обновлен!");
+                navigate("/admin/brands");
             })
             .catch((err) => {
                 console.error("Ошибка обновления бренда:", err);

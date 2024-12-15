@@ -98,8 +98,6 @@ const FormFoAdd = () => {
 
             console.log("Ответ от сервера:", response.data);
             setModalVisible(true);
-
-            // Сбрасываем форму
             setFormState({
                 price: 0,
                 isProducer: true,

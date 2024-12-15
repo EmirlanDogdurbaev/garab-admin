@@ -19,7 +19,7 @@ const CreateProduct = () => {
     const navigate = useNavigate();
 
     const [formState, setFormState] = useState({
-        price: "",
+        price: 0,
         isProducer: true,
         isPainted: false,
         isPopular: true,
@@ -106,7 +106,7 @@ const CreateProduct = () => {
         });
 
         try {
-            const response = await axios.post(`${API_URI}/items`, formData, {
+             await axios.post(`${API_URI}/items`, formData, {
                 headers: {"Content-Type": "multipart/form-data"},
             });
             setSuccessMessage("Продукт успешно добавлен!");
@@ -232,24 +232,51 @@ const CreateProduct = () => {
                     ))}
 
                     <div className={styles.filters}>
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={formState.isPopular}
-                                onChange={() =>
-                                    handleFormChange("isPopular", !formState.isPopular)
-                                }
-                            />
-                            Популярный товар
-                        </label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={formState.isNew}
-                                onChange={() => handleFormChange("isNew", !formState.isNew)}
-                            />
-                            Новый товар (новинка)
-                        </label>
+                        <div className={styles.group}>
+                            <h5>Производство</h5>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="isProducer"
+                                    value={true}
+                                    checked={formState.isProducer === true}
+                                    onChange={() => handleFormChange("isProducer", true)}
+                                />
+                                Производитель
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="isProducer"
+                                    value={false}
+                                    checked={formState.isProducer === false}
+                                    onChange={() => handleFormChange("isProducer", false)}
+                                />
+                                Дистрибьютор
+                            </label>
+                        </div>
+
+                        <div className={styles.group}>
+                            <h5>Дополнительно</h5>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={formState.isPopular}
+                                    onChange={() =>
+                                        handleFormChange("isPopular", !formState.isPopular)
+                                    }
+                                />
+                                Популярный товар
+                            </label>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={formState.isNew}
+                                    onChange={() => handleFormChange("isNew", !formState.isNew)}
+                                />
+                                Новый товар (новинка)
+                            </label>
+                        </div>
                     </div>
 
                     <div className={styles.photos}>
