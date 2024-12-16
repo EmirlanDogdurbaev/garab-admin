@@ -7,7 +7,7 @@ import {customStyles} from "../../AllDiscounts/ModifySpecialOffer/ModifySpecialO
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAllCollections} from "../../../store/slices/admin/collections/collections.js";
 import {fetchCategories} from "../../../store/slices/getCategories.js";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 
 const UpdateProducts = () => {
@@ -18,8 +18,8 @@ const UpdateProducts = () => {
     const [photos, setPhotos] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [modal, setModal] = useState({show: false, message: "", type: ""}); // Для модального окна
-
+    const [modal, setModal] = useState({show: false, message: "", type: ""});
+    const navigate = useNavigate();
 
     const [formState, setFormState] = useState({
         price: 0,
@@ -121,7 +121,6 @@ const UpdateProducts = () => {
     };
 
 
-
     const handleFileChange = (index, file) => {
         const updatedPhotos = [...photos];
         updatedPhotos[index].file = file;
@@ -177,7 +176,7 @@ const UpdateProducts = () => {
 
             console.log(response.data);
             setModal({show: true, message: "Товар успешно обновлён", type: "success"});
-
+            navigate("/admin/all-products");
         } catch (err) {
             setError(err.response?.data || "Ошибка при обновлении товара.");
             console.error("Ошибка:", err);
@@ -188,8 +187,6 @@ const UpdateProducts = () => {
         setModal({show: false, message: "", type: ""});
     };
     if (loading) return <p>Загрузка...</p>;
-
-
 
 
     console.log("Photos:", photos);

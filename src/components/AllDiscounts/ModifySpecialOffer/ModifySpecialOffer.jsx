@@ -21,15 +21,12 @@ const ModifySpecialOffer = () => {
     useEffect(() => {
         if (selectedType?.value === "item") {
             dispatch(fetchWithoutDiscountProducts());
-        } else if (selectedType?.value === "collection") {
-            dispatch(fetchWithoutDiscountCollections());
         }
     }, [dispatch, selectedType]);
 
 
 
     const options = [
-        {value: "collection", label: "Коллекция"},
         {value: "item", label: "Продукт"},
     ];
 
