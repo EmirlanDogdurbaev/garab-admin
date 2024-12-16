@@ -46,7 +46,21 @@ const FormFoAdd = () => {
 
     const handleFileChange = (index, file) => {
         const updatedPhotos = [...photos];
-        updatedPhotos[index].file = file;
+        const fileName = file.name;
+        const fileExtension = fileName.substring(fileName.lastIndexOf('.'));
+        const baseName = fileName.substring(0, fileName.lastIndexOf('.'));
+
+
+        let newFileName = fileName;
+        let counter = 1;
+
+        while (updatedPhotos.some(photo => photo.file?.name === newFileName)) {
+            newFileName = `${baseName}_${counter}${fileExtension}`;
+            counter++;
+        }
+
+        const renamedFile = new File([file], newFileName, {type: file.type});
+        updatedPhotos[index].file = renamedFile;
         setPhotos(updatedPhotos);
     };
 
