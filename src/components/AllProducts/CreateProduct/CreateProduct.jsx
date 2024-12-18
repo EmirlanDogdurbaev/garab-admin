@@ -20,9 +20,11 @@ const CreateProduct = () => {
 
     const [formState, setFormState] = useState({
         price: 0,
-        isProducer: true,
         isPainted: false,
         isPopular: true,
+        isProducer: true,
+        isAqua: false,
+        isGarant: false,
         isNew: true,
         category_id: null,
         collection_id: null,
@@ -81,6 +83,18 @@ const CreateProduct = () => {
         setPhotos(updatedPhotos);
     };
 
+    const handleExclusiveToggle = (field) => {
+        setFormState((prev) => ({
+            ...prev,
+            isProducer: false,
+            isAqua: false,
+            isGarant: false,
+            [field]: true,
+        }));
+
+        console.log(formState)
+    };
+
 
     const handlePhotoFieldChange = (index, field, value) => {
         const updatedPhotos = [...photos];
@@ -97,11 +111,14 @@ const CreateProduct = () => {
 
         const formData = new FormData();
 
+        // Добавляем данные формы
         formData.append(
             "item",
             JSON.stringify({
                 price: formState.price,
-                isProducer: formState.isProducer,
+                isProducer: formState.isProducer, // Производитель
+                isAqua: formState.isAqua,         // Водный
+                isGarant: formState.isGarant,     // Гарантированный
                 isPainted: formState.isPainted,
                 is_popular: formState.isPopular,
                 is_new: formState.isNew,
@@ -112,6 +129,7 @@ const CreateProduct = () => {
             })
         );
 
+        // Обработка фотографий
         photos.forEach((photo) => {
             if (photo.file) {
                 formData.append(`photos`, photo.file);
@@ -121,14 +139,20 @@ const CreateProduct = () => {
         });
 
         try {
-             await axios.post(`${API_URI}/items`, formData, {
+            // Отправка данных на сервер
+            await axios.post(`${API_URI}/items`, formData, {
                 headers: {"Content-Type": "multipart/form-data"},
             });
+
+            // Уведомление об успешной операции
             setSuccessMessage("Продукт успешно добавлен!");
 
+            // Сброс состояния формы
             setFormState({
                 price: "",
-                isProducer: true,
+                isProducer: true, // По умолчанию "Производитель"
+                isAqua: false,
+                isGarant: false,
                 isPainted: false,
                 isPopular: true,
                 isNew: true,
@@ -140,6 +164,7 @@ const CreateProduct = () => {
                     {name: "", description: "", language_code: "en"},
                 ],
             });
+
             setPhotos([]);
 
             setTimeout(() => setSuccessMessage(""), 3000);
@@ -149,6 +174,7 @@ const CreateProduct = () => {
             console.error("Ошибка:", err);
         }
     };
+
 
     return (
         <div className={styles.AddCollection}>
@@ -252,22 +278,32 @@ const CreateProduct = () => {
                             <label>
                                 <input
                                     type="radio"
-                                    name="isProducer"
-                                    value={true}
-                                    checked={formState.isProducer === true}
-                                    onChange={() => handleFormChange("isProducer", true)}
+                                    name="exclusive"
+                                    value="isProducer"
+                                    checked={formState.isProducer}
+                                    onChange={() => handleExclusiveToggle("isProducer")}
                                 />
                                 Производитель
                             </label>
                             <label>
                                 <input
                                     type="radio"
-                                    name="isProducer"
-                                    value={false}
-                                    checked={formState.isProducer === false}
-                                    onChange={() => handleFormChange("isProducer", false)}
+                                    name="exclusive"
+                                    value="isAqua"
+                                    checked={formState.isAqua}
+                                    onChange={() => handleExclusiveToggle("isAqua")}
                                 />
-                                Дистрибьютор
+                                Водный
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="exclusive"
+                                    value="isGarant"
+                                    checked={formState.isGarant}
+                                    onChange={() => handleExclusiveToggle("isGarant")}
+                                />
+                                Гарантированный
                             </label>
                         </div>
 

@@ -23,7 +23,9 @@ const UpdateProducts = () => {
 
     const [formState, setFormState] = useState({
         price: 0,
-        isProducer: false,
+        isProducer: true,
+        isAqua: false,
+        isGarant: false,
         isPainted: false,
         isPopular: false,
         isNew: false,
@@ -35,6 +37,17 @@ const UpdateProducts = () => {
             {name: "", description: "", language_code: "en"},
         ],
     });
+
+    const handleExclusiveToggle = (field) => {
+        setFormState((prev) => ({
+            ...prev,
+            isProducer: false,
+            isAqua: false,
+            isGarant: false,
+            [field]: true,
+        }));
+    };
+
 
     useEffect(() => {
         dispatch(fetchAllCollections());
@@ -162,6 +175,8 @@ const UpdateProducts = () => {
             JSON.stringify({
                 price: formState.price,
                 isProducer: formState.isProducer,
+                isAqua: formState.isAqua,
+                isGarant: formState.isGarant,
                 isPainted: formState.isPainted,
                 is_popular: formState.isPopular,
                 is_new: formState.isNew,
@@ -173,7 +188,6 @@ const UpdateProducts = () => {
         );
 
         photos.forEach((photo) => {
-            console.log(photo)
             if (photo.file) {
                 formData.append(`photos`, photo.file);
                 formData.append(`isMain_${photo.file.name}`, photo.isMain);
@@ -182,14 +196,13 @@ const UpdateProducts = () => {
         });
 
         try {
-            const response = await axios.put(`${API_URI}/items?item_id=${id}`, formData, {
+             await axios.put(`${API_URI}/items?item_id=${id}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
 
-            console.log(response.data);
             setModal({show: true, message: "Товар успешно обновлён", type: "success"});
             navigate("/admin/all-products");
         } catch (err) {
@@ -197,6 +210,7 @@ const UpdateProducts = () => {
             console.error("Ошибка:", err);
         }
     };
+
 
     const closeModal = () => {
         setModal({show: false, message: "", type: ""});
@@ -296,26 +310,36 @@ const UpdateProducts = () => {
 
                     <div className={styles.filters}>
                         <div className={styles.group}>
-                            <h5>Производство</h5>
+                            <h5>Тип продукта</h5>
                             <label>
                                 <input
                                     type="radio"
-                                    name="isProducer"
-                                    value={true}
-                                    checked={formState.isProducer === true}
-                                    onChange={() => handleFormChange("isProducer", true)}
+                                    name="exclusive"
+                                    value="isProducer"
+                                    checked={formState.isProducer}
+                                    onChange={() => handleExclusiveToggle("isProducer")}
                                 />
                                 Производитель
                             </label>
                             <label>
                                 <input
                                     type="radio"
-                                    name="isProducer"
-                                    value={false}
-                                    checked={formState.isProducer === false}
-                                    onChange={() => handleFormChange("isProducer", false)}
+                                    name="exclusive"
+                                    value="isAqua"
+                                    checked={formState.isAqua}
+                                    onChange={() => handleExclusiveToggle("isAqua")}
                                 />
-                                Дистрибьютор
+                                Водный
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="exclusive"
+                                    value="isGarant"
+                                    checked={formState.isGarant}
+                                    onChange={() => handleExclusiveToggle("isGarant")}
+                                />
+                                Гарантированный
                             </label>
                         </div>
 

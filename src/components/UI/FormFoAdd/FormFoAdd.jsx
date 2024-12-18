@@ -6,8 +6,9 @@ import {useNavigate} from "react-router-dom";
 
 const FormFoAdd = () => {
     const [formState, setFormState] = useState({
-
         isProducer: true,
+        isAqua: false,
+        isGarant: false,
         isPainted: false,
         isPopular: true,
         isNew: true,
@@ -28,6 +29,17 @@ const FormFoAdd = () => {
         setFormState((prev) => ({
             ...prev,
             [field]: value,
+        }));
+    };
+
+
+    const handleExclusiveToggle = (field) => {
+        setFormState((prev) => ({
+            ...prev,
+            isProducer: false,
+            isAqua: false,
+            isGarant: false,
+            [field]: true,
         }));
     };
 
@@ -82,8 +94,9 @@ const FormFoAdd = () => {
         formData.append(
             "collection",
             JSON.stringify({
-
                 isProducer: formState.isProducer,
+                isAqua: formState.isAqua,
+                isGarant: formState.isGarant,
                 isPainted: formState.isPainted,
                 isPopular: formState.isPopular,
                 isNew: formState.isNew,
@@ -115,6 +128,8 @@ const FormFoAdd = () => {
             setFormState({
                 price: 0,
                 isProducer: true,
+                isAqua: false,
+                isGarant: false,
                 isPainted: false,
                 isPopular: true,
                 isNew: true,
@@ -195,26 +210,36 @@ const FormFoAdd = () => {
 
                 <div className={styles.filters}>
                     <div className={styles.group}>
-                        <h5>Производство</h5>
+                        <h5>Тип продукта</h5>
                         <label>
                             <input
                                 type="radio"
-                                name="isProducer"
-                                value={true}
-                                checked={formState.isProducer === true}
-                                onChange={() => handleFormChange("isProducer", true)}
+                                name="exclusive"
+                                value="isProducer"
+                                checked={formState.isProducer}
+                                onChange={() => handleExclusiveToggle("isProducer")}
                             />
                             Производитель
                         </label>
                         <label>
                             <input
                                 type="radio"
-                                name="isProducer"
-                                value={false}
-                                checked={formState.isProducer === false}
-                                onChange={() => handleFormChange("isProducer", false)}
+                                name="exclusive"
+                                value="isAqua"
+                                checked={formState.isAqua}
+                                onChange={() => handleExclusiveToggle("isAqua")}
                             />
-                            Дистрибьютор
+                            Водный
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="exclusive"
+                                value="isGarant"
+                                checked={formState.isGarant}
+                                onChange={() => handleExclusiveToggle("isGarant")}
+                            />
+                            Гарантированный
                         </label>
                     </div>
 
